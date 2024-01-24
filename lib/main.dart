@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetofinalflutter/screens/final_screen.dart';
+import 'package:projetofinalflutter/screens/finalizar_screen.dart';
 import 'package:projetofinalflutter/screens/my_home_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: LoginScreen(title: title),
       routes: {
         Routes.LOGIN: (context) => LoginScreen(title: title),
-        Routes.FINAL: (context) => FinalScreen(title: title),
+        Routes.FINAL: (context) => FinalizarScreen(title: title),
       },
     );
   }

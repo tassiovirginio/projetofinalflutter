@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 
-class FinalScreen extends StatefulWidget {
-  const FinalScreen({super.key, required this.title});
+class FinalizarScreen extends StatefulWidget {
+  const FinalizarScreen({super.key, required this.title});
 
   final String title;
 
   @override
-  State<FinalScreen> createState() => FinalScreenState(title);
+  State<FinalizarScreen> createState() => FinalizarScreenState(title);
 }
 
-class FinalScreenState extends State<FinalScreen> {
-  FinalScreenState(this.title);
+class FinalizarScreenState extends State<FinalizarScreen> {
+  FinalizarScreenState(this.title);
   var title;
 
   @override
