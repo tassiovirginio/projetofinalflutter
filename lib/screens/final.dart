@@ -18,40 +18,33 @@ class MyApp extends StatelessWidget {
         ),
         
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[ 
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
               Text(" Sabores do Mundo",
               textAlign: TextAlign.center, style: TextStyle(fontSize: 28,fontFamily: 'Times New Roman',fontStyle: FontStyle.italic), ),
-              Image.asset('lib/assets/logo2.png',height: 80),
-            ],),
+              Image.asset('lib/assets/logo.png',height: 100),
+              ],),
 
+            Column(children: [
             Text("Pedido Feito com Sucesso",
-            textAlign: TextAlign.center, style: TextStyle(fontSize: 30,fontFamily: 'Times New Roman',fontWeight: FontWeight.bold), ),
-            
-
-             Container(
-              //color: Color.fromARGB(255, 241, 234, 234),
-              height: 180,
-              width: 100,
-              child:             
-              Container(
-                  margin: EdgeInsets.all(20.0),
-                  height: 150,
-                  width: 130,
+            textAlign: TextAlign.center, style: TextStyle(fontSize: 28,fontFamily: 'Times New Roman',fontWeight: FontWeight.bold), ),
+            Container(
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                          cardBig("Produtos \nEm estoque", "    200", Colors.red),
+                          cardBig("flagcliente", "flagpedido", "flagvalortotal" ,Color.fromARGB(255, 164, 158, 141)),
                           ],
                         )
-                  ),
-            ),
+                ),
+              
+              ],),
 
-          Container(
+            Container(
                     margin: EdgeInsets.fromLTRB(100,0,100,0),
                     child:                
                       ElevatedButton(
@@ -61,9 +54,9 @@ class MyApp extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(9.0)),
                       )),
                       onPressed: () {},
-                      child: Text('Entrar', style: TextStyle(fontSize: 20, color: Colors.white))
+                      child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))
                     ), 
-                  ),
+              ),
 
           ],
           ),
@@ -74,45 +67,33 @@ class MyApp extends StatelessWidget {
 
 
 
-Widget cardBig(String texto, String msg, Color color) {
+Widget cardBig(String cliente, String pedido, String total, Color color) {
   return Card(
     color: color,
-    child: Row(
+    child: Container(
+      margin: EdgeInsets.all(10.0),
+      height: 140,
+      width: 250,
+      child: 
+      Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        Container(
-              margin: EdgeInsets.fromLTRB(5, 10, 0, 0),
-              alignment: Alignment.centerLeft,
-              height: 150,
-              width: 350,
-              child: Column(
-              children: [
                   Text(
-                    texto,
-                    style: TextStyle(fontSize: 15, color: Colors.white),
+                    "Cliente:          $cliente",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
-                  SizedBox(width: 100, height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        msg,
-                        style: TextStyle(fontSize: 40, color: Colors.white),
-                        ), 
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(2)),
-                          )),
-                          onPressed: () {},
-                          child: Text('Mais', style: TextStyle(fontSize: 20, color: Colors.white))
-                        ),],),
-                ],
-              ),
-            ),
+                  Text(
+                    "Pedido nº:     $pedido",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  Text(
+                    "Total:         RS $total",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
       ]
-      
     ),
+    )
     
   );
 }
