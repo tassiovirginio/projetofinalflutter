@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/screens/final_screen.dart';
 import 'package:projetofinalflutter/screens/my_home_screen.dart';
-import 'package:projetofinalflutter/screens/checkin_screen.dart';
+import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 
@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: color_background),
         useMaterial3: true,
       ),
-      home: CheckInScreen(title: title),
+      home: LoginScreen(title: title),
       routes: {
-        Routes.LOGIN: (context) => CheckInScreen(title: title),
+        Routes.LOGIN: (context) => LoginScreen(title: title),
         Routes.FINAL: (context) => FinalScreen(title: title),
       },
     );
