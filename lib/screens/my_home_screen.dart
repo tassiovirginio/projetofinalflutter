@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetofinalflutter/utils/utils.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -22,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: color_background,
         title: Text(widget.title),
       ),
       body: Center(
