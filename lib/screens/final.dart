@@ -34,10 +34,21 @@ class MyApp extends StatelessWidget {
             
 
              Container(
-              margin: EdgeInsets.all(10.0),
-              //color: Color.fromARGB(255, 202, 202, 217),
+              //color: Color.fromARGB(255, 241, 234, 234),
+              height: 180,
               width: 100,
-              child: Column(),
+              child:             
+              Container(
+                  margin: EdgeInsets.all(20.0),
+                  height: 150,
+                  width: 130,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                          cardBig("Produtos \nEm estoque", "    200", Colors.red),
+                          ],
+                        )
+                  ),
             ),
 
           Container(
@@ -62,12 +73,46 @@ class MyApp extends StatelessWidget {
 }
 
 
-InputDecoration getAuthenticationImputDecoration(String hintLabel) {
-  return InputDecoration (
-          hintText: hintLabel,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(23)),
-          fillColor: const Color.fromARGB(255, 201, 183, 183),
-          filled: true,
-          labelStyle: TextStyle(fontSize: 20,color: Colors.black),
+
+Widget cardBig(String texto, String msg, Color color) {
+  return Card(
+    color: color,
+    child: Row(
+      children: <Widget>[
+        Container(
+              margin: EdgeInsets.fromLTRB(5, 10, 0, 0),
+              alignment: Alignment.centerLeft,
+              height: 150,
+              width: 350,
+              child: Column(
+              children: [
+                  Text(
+                    texto,
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ),
+                  SizedBox(width: 100, height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        msg,
+                        style: TextStyle(fontSize: 40, color: Colors.white),
+                        ), 
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                          primary: Colors.blue,
+                          shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                          )),
+                          onPressed: () {},
+                          child: Text('Mais', style: TextStyle(fontSize: 20, color: Colors.white))
+                        ),],),
+                ],
+              ),
+            ),
+      ]
+      
+    ),
+    
   );
 }
