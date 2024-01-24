@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-//import 'package:flutter/widgets.dart';
+import 'package:projetofinalflutter/components/card_big.dart';
 
 class FinalScreen extends StatefulWidget {
   const FinalScreen({super.key, required this.title});
@@ -8,11 +7,13 @@ class FinalScreen extends StatefulWidget {
   final String title;
 
   @override
-  State<FinalScreen> createState() => FinalScreenState();
+  State<FinalScreen> createState() => FinalScreenState(title);
 }
 
 class FinalScreenState extends State<FinalScreen> {
-  // This widget is the root of your application.
+  FinalScreenState(this.title);
+  var title;
+
   @override
   Widget build(BuildContext) {
     return MaterialApp(
@@ -20,7 +21,7 @@ class FinalScreenState extends State<FinalScreen> {
         backgroundColor: Color.fromARGB(255, 185, 177, 155),
         appBar: AppBar(
           backgroundColor: Color.fromARGB(255, 232, 231, 229),
-          title: Text('Restaurante Sabores do Mundo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
@@ -34,7 +35,7 @@ class FinalScreenState extends State<FinalScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  " Sabores do Mundo",
+                  this.title,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
                 ),
@@ -75,31 +76,4 @@ class FinalScreenState extends State<FinalScreen> {
       ),
     );
   }
-}
-
-Widget cardBig(String cliente, String pedido, String total, Color color) {
-  return Card(
-      color: color,
-      child: Container(
-        margin: EdgeInsets.all(10.0),
-        height: 140,
-        width: 250,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Text(
-                "Cliente:          $cliente",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              Text(
-                "Pedido nº:     $pedido",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              Text(
-                "Total:         RS $total",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ]),
-      ));
 }
