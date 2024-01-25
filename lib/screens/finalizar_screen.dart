@@ -3,6 +3,7 @@ import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
+import 'package:projetofinalflutter/screens/menu_screen.dart';
 
 class FinalizarScreen extends StatefulWidget {
   const FinalizarScreen({super.key, required this.title});
@@ -41,11 +42,6 @@ class FinalizarScreenState extends State<FinalizarScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  this.title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
-                ),
                 Image.asset('lib/assets/logo.png', height: 100),
               ],
             ),
@@ -75,6 +71,10 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
                       )),
                   onPressed: () {
+                    LoginScreenState.usuarioLogado = [];
+                    MenuScreenState.carrinho = [];
+                    ConfirmacaoScreenState.pedido = [];
+
                     Navigator.of(context).pushNamed(Routes.LOGIN.name);
                   },
                   child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
