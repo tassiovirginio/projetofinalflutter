@@ -70,23 +70,43 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                 )),
               ],
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                      )),
-                  onPressed: () {
-                    LoginScreenState.usuarioLogado = [];
-                    MenuScreenState.carrinho = [];
-                    ConfirmacaoScreenState.pedido = [];
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                          )),
+                      onPressed: () {
+                        MenuScreenState.carrinho = [];
+                        ConfirmacaoScreenState.pedido = [];
+                        Navigator.of(context).pushNamed(Routes.MENU.name);
+                      },
+                      child: Text('Novo Pedido', style: TextStyle(fontSize: 20, color: Colors.white))),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                          )),
+                      onPressed: () {
+                        LoginScreenState.usuarioLogado = [];
+                        MenuScreenState.carrinho = [];
+                        ConfirmacaoScreenState.pedido = [];
 
-                    Navigator.of(context).pushNamed(Routes.LOGIN.name);
-                  },
-                  child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
-            ),
+                        Navigator.of(context).pushNamed(Routes.LOGIN.name);
+                      },
+                      child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
+                ),
+              ],
+            )
           ],
         ),
       ),

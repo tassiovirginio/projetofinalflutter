@@ -129,13 +129,19 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () async {
+                              List<String> listaItensId = [];
+
+                              MenuScreenState.carrinho.forEach((item) {
+                                listaItensId.add(item.name);
+                              });
+
                               pedido = [
                                 "",
                                 LoginScreenState.usuarioLogado[1],
                                 LoginScreenState.usuarioLogado[2],
                                 LoginScreenState.usuarioLogado[3],
-                                MenuScreenState.carrinho.toString(),
-                                "100"
+                                listaItensId.toString(),
+                                valorTotal.toString()
                               ];
                               List<String> lsitaPedidos = await DataBase.realizarPedido(
                                   pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
