@@ -6,6 +6,8 @@ import 'package:projetofinalflutter/database/database.dart';
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.title});
 
+  static List<String> carrinho = [];
+
   final String title;
 
   @override
@@ -15,16 +17,17 @@ class MenuScreen extends StatefulWidget {
 class MenuScreenState extends State<MenuScreen> {
   MenuScreenState(this.title);
   var title;
+  List<Widget> listaProdutosWidget = [];
 
   @override
   Widget build(BuildContext) {
     List<List<String>>? listaProdutos = DataBase.listaProdutos;
 
-    List<Widget> listaProdutosWidget = [];
-
-    listaProdutos?.forEach((element) {
-      listaProdutosWidget.add(itemMenu(element[1], element[2], element[3]));
-    });
+    listaProdutos?.forEach((element) => {
+          if (element[0] != "id")
+            listaProdutosWidget.add(
+                itemMenu(element[0], element[1], element[2], element[3], () => {MenuScreen.carrinho.add(element[0])}))
+        });
 
     Column columnProdutos = Column(
       children: listaProdutosWidget,
@@ -47,30 +50,37 @@ class MenuScreenState extends State<MenuScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row( 
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(children: [
-                      IconButton(
+                    IconButton(
                         onPressed: () => {},
-                        icon: Icon(Icons.list, size: 50.0,),
-                      ),
-                      Text("Menu",
-                      textAlign: TextAlign.center, style: TextStyle(fontSize: 38,fontFamily: 'Times New Roman',fontStyle: FontStyle.italic), ),
-                    ]
-                  ),
-                  Column(children: [
-                    Image.asset('lib/assets/logo.png',height: 80),
-                  ],)
-                ],),
+                        icon: Icon(
+                          Icons.list,
+                          size: 50.0,
+                        )),
+                    Text(
+                      "Menu",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                    ),
+                  ]),
+                  Column(
+                    children: [
+                      Image.asset('lib/assets/logo.png', height: 80),
+                    ],
+                  )
+                ],
+              ),
               SizedBox(height: 20),
               Container(
                 alignment: Alignment.topRight,
                 child: TextButton(
                     onPressed: () => {},
                     child: Text(
-                      "Itens no carrinho: 12",
+                      "Itens no carrinho: " + MenuScreen.carrinho.length.toString(),
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -79,14 +89,12 @@ class MenuScreenState extends State<MenuScreen> {
                     )),
               ),
               SizedBox(height: 20),
-              Text("Pratos",
-                  textAlign: TextAlign.start, style: TextStyle(fontSize: 32,fontFamily: 'Times New Roman',fontWeight: FontWeight.bold), 
-                ),
+              Text(
+                "Pratos",
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 32, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+              ),
               columnProdutos,
-              // itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
-              // itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
-              // itemMenu("X-Tudo", "Pão, carne, queijo, ovo, bacon, alface, tomate e maionese", "R\$ 20,00"),
-              // itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
               SizedBox(height: 20),
               Container(
                   margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
@@ -124,14 +132,11 @@ class MenuScreenState extends State<MenuScreen> {
   }
 }
 
-
-
-                
-Widget itemMenu(String nome, String descricao, String preco) {
+Widget itemMenu(String id, String nome, String descricao, String preco, Function funcao) {
   return Container(
     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 330,
-    height: 80,
+    height: 120,
     child: Card(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
@@ -147,7 +152,7 @@ Widget itemMenu(String nome, String descricao, String preco) {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: () => {}, icon: Icon(Icons.add_shopping_cart))
+          IconButton(onPressed: () => funcao, icon: Icon(Icons.add_shopping_cart))
         ]),
         Row(
           children: [
@@ -160,7 +165,7 @@ Widget itemMenu(String nome, String descricao, String preco) {
               ),
             )
           ],
-        )
+        ),
       ]),
     ),
   );
