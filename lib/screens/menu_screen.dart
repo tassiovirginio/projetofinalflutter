@@ -17,10 +17,11 @@ class MenuScreenState extends State<MenuScreen> {
   var title;
 
   static List<String> carrinho = [];
+  static List<List<String>>? listaProdutos;
 
   @override
   Widget build(BuildContext) {
-    List<List<String>>? listaProdutos = DataBase.listaProdutos;
+    listaProdutos = DataBase.listaProdutos;
     List<Widget> listaProdutosWidget = [];
 
     listaProdutos?.forEach((element) => {

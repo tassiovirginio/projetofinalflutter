@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
+import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
 
@@ -18,6 +19,31 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
   @override
   Widget build(BuildContext) {
+    List<List<String>>? listaProdutos = MenuScreenState.listaProdutos;
+
+    Map<String, List<String>> mapaProdutos = {};
+
+    listaProdutos?.forEach((element) {
+      if (element[0] != "id") {
+        mapaProdutos[element[0]] = element;
+      }
+    });
+
+    print(mapaProdutos);
+
+    List<Widget> listaCarrinhoWidget = [];
+
+    MenuScreenState.carrinho.forEach((id) {
+      List<String>? produto = mapaProdutos[id];
+
+      if (produto != null) {
+        print("->" + produto[0]);
+        listaCarrinhoWidget.add(itemMenu(produto[1], produto[2], produto[3]));
+      }
+    });
+
+    Column colunacarrinho = Column(children: listaCarrinhoWidget);
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 185, 177, 155),
@@ -62,15 +88,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                       )),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  "Confirmação",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-                ),
-                itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
-                itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
-                itemMenu("X-Tudo", "Pão, carne, queijo, ovo, bacon, alface, tomate e maionese", "R\$ 20,00"),
-                itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
+                colunacarrinho,
                 SizedBox(height: 20),
                 Container(
                     width: 400,
