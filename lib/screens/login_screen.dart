@@ -71,7 +71,7 @@ class LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
-                            Navigator.of(context).pushNamed(Routes.FINAL.name);
+                            Navigator.of(context).pushNamed(Routes.MENU.name);
                           },
                           child: const Text('Entrar', style: TextStyle(fontSize: 20, color: Colors.white))),
                     ),
