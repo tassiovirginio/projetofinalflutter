@@ -6,8 +6,6 @@ import 'package:projetofinalflutter/database/database.dart';
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.title});
 
-  static List<String> carrinho = [];
-
   final String title;
 
   @override
@@ -18,6 +16,7 @@ class MenuScreenState extends State<MenuScreen> {
   MenuScreenState(this.title);
   var title;
   List<Widget> listaProdutosWidget = [];
+  static List<String> carrinho = [];
 
   @override
   Widget build(BuildContext) {
@@ -25,8 +24,16 @@ class MenuScreenState extends State<MenuScreen> {
 
     listaProdutos?.forEach((element) => {
           if (element[0] != "id")
-            listaProdutosWidget.add(
-                itemMenu(element[0], element[1], element[2], element[3], () => {MenuScreen.carrinho.add(element[0])}))
+            listaProdutosWidget.add(itemMenu(
+                element[0],
+                element[1],
+                element[2],
+                element[3],
+                () => {
+                      setState(() {
+                        MenuScreenState.carrinho.add(element[0]);
+                      })
+                    }))
         });
 
     Column columnProdutos = Column(
@@ -80,7 +87,7 @@ class MenuScreenState extends State<MenuScreen> {
                 child: TextButton(
                     onPressed: () => {},
                     child: Text(
-                      "Itens no carrinho: " + MenuScreen.carrinho.length.toString(),
+                      "Itens no carrinho: " + MenuScreenState.carrinho.length.toString(),
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,
@@ -132,7 +139,7 @@ class MenuScreenState extends State<MenuScreen> {
   }
 }
 
-Widget itemMenu(String id, String nome, String descricao, String preco, Function funcao) {
+Widget itemMenu(String id, String nome, String descricao, String preco, Function() funcao) {
   return Container(
     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 330,
@@ -152,7 +159,7 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: () => funcao, icon: Icon(Icons.add_shopping_cart))
+          IconButton(onPressed: funcao, icon: Icon(Icons.add_shopping_cart))
         ]),
         Row(
           children: [
