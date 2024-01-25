@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
+import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/database/database.dart';
 
@@ -16,26 +17,38 @@ class MenuScreenState extends State<MenuScreen> {
   MenuScreenState(this.title);
   var title;
 
-  static List<String> carrinho = [];
+  static List<Item> carrinho = [];
   static List<List<String>>? listaProdutos;
+  static int index = 0;
+  static double valorTotal = 0;
 
   @override
   Widget build(BuildContext) {
     listaProdutos = DataBase.listaProdutos;
     List<Widget> listaProdutosWidget = [];
 
+    valorTotal = 0;
+    MenuScreenState.carrinho.forEach((item) {
+      double valor = double.parse(item.valor);
+      valorTotal += valor;
+    });
+
     listaProdutos?.forEach((element) => {
           if (element[0] != "id")
-            listaProdutosWidget.add(itemMenu(
-                element[0],
-                element[1],
-                element[2],
-                element[3],
-                () => {
-                      setState(() {
-                        MenuScreenState.carrinho.add(element[0]);
-                      })
-                    }))
+            {
+              listaProdutosWidget.add(itemMenu(
+                  element[0],
+                  element[1],
+                  element[2],
+                  element[3],
+                  () => {
+                        setState(() {
+                          int id = int.parse(element[0]);
+                          var item = Item(id: id, name: element[1], descricao: element[2], valor: element[3]);
+                          MenuScreenState.carrinho.add(item);
+                        })
+                      }))
+            },
         });
 
     Column columnProdutos = Column(
@@ -87,9 +100,12 @@ class MenuScreenState extends State<MenuScreen> {
               Container(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                    onPressed: () => {},
+                    onPressed: () => {print(valorTotal)},
                     child: Text(
-                      "Itens no carrinho: " + MenuScreenState.carrinho.length.toString(),
+                      "Itens no carrinho: " +
+                          MenuScreenState.carrinho.length.toString() +
+                          "\nValor Total: " +
+                          valorTotal.toString(),
                       style: TextStyle(
                           fontSize: 18,
                           color: Colors.black,

@@ -18,6 +18,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
   ConfirmacaoScreenState(this.title);
   var title;
   static var pedido = [];
+  static double valorTotal = 0;
 
   @override
   Widget build(BuildContext) {
@@ -35,13 +36,20 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
     List<Widget> listaCarrinhoWidget = [];
 
-    MenuScreenState.carrinho.forEach((id) {
-      List<String>? produto = mapaProdutos[id];
-
-      if (produto != null) {
-        print("->" + produto[0]);
-        listaCarrinhoWidget.add(itemMenu(produto[1], produto[2], produto[3]));
-      }
+    valorTotal = 0;
+    MenuScreenState.carrinho.forEach((item) {
+      double valor = double.parse(item.valor);
+      valorTotal += valor;
+      listaCarrinhoWidget.add(itemMenu(
+          item.name,
+          item.descricao,
+          item.valor,
+          () => {
+                setState(() {
+                  // MenuScreenState.carrinho.removeWhere((i) => i == produto);
+                  MenuScreenState.carrinho.remove(item);
+                })
+              }));
     });
 
     Column colunacarrinho = Column(children: listaCarrinhoWidget);
@@ -81,7 +89,10 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   child: TextButton(
                       onPressed: () => {},
                       child: Text(
-                        "Itens no carrinho: " + MenuScreenState.carrinho.length.toString(),
+                        "Itens no carrinho: " +
+                            MenuScreenState.carrinho.length.toString() +
+                            "\nValor Total: " +
+                            valorTotal.toString(),
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -142,7 +153,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
   }
 }
 
-Widget itemMenu(String nome, String descricao, String preco) {
+Widget itemMenu(String nome, String descricao, String preco, Function() funcao) {
   return Container(
     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 310,
@@ -162,7 +173,7 @@ Widget itemMenu(String nome, String descricao, String preco) {
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: () => {}, icon: Icon(Icons.delete_sharp))
+          IconButton(onPressed: () => funcao(), icon: Icon(Icons.delete_sharp))
         ]),
         Row(
           children: [

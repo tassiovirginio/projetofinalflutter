@@ -22,8 +22,16 @@ class FinalizarScreenState extends State<FinalizarScreen> {
   String numero = LoginScreenState.usuarioLogado[2];
   String endereco = LoginScreenState.usuarioLogado[3];
 
+  double valorTotal = 0;
+
   @override
   Widget build(BuildContext) {
+    valorTotal = 0;
+    MenuScreenState.carrinho.forEach((item) {
+      double valor = double.parse(item.valor);
+      valorTotal += valor;
+    });
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 185, 177, 155),
@@ -56,7 +64,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    cardBig(ConfirmacaoScreenState.pedido[1], ConfirmacaoScreenState.pedido[0], "100",
+                    cardBig(ConfirmacaoScreenState.pedido[1], ConfirmacaoScreenState.pedido[0], valorTotal.toString(),
                         Color.fromARGB(255, 164, 158, 141)),
                   ],
                 )),
