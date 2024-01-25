@@ -15,12 +15,13 @@ class MenuScreen extends StatefulWidget {
 class MenuScreenState extends State<MenuScreen> {
   MenuScreenState(this.title);
   var title;
-  List<Widget> listaProdutosWidget = [];
+
   static List<String> carrinho = [];
 
   @override
   Widget build(BuildContext) {
     List<List<String>>? listaProdutos = DataBase.listaProdutos;
+    List<Widget> listaProdutosWidget = [];
 
     listaProdutos?.forEach((element) => {
           if (element[0] != "id")
