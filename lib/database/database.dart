@@ -23,6 +23,7 @@ class DataBase {
   static var gsheets;
   static var ss;
   static var sheetProdutos;
+  static var sheetPedidos;
   static List<List<String>>? listaProdutos;
   static List<List<String>>? listaPedidos;
 
@@ -37,6 +38,8 @@ class DataBase {
     listaPedidos = await criarTabelaPedidos(DataBase.ss);
 
     carregarLista(listaPedidos);
+
+    realizarPedido("11", "Tassio", "6399999999", "Rua XX, XXX - Nova Cidade", "Pizza;X-burger", "40");
   }
 
   static Future<List<List<String>>> criarTabelaMenu(Spreadsheet ss) async {
@@ -72,41 +75,41 @@ class DataBase {
   }
 
   static Future<List<List<String>>> criarTabelaPedidos(Spreadsheet ss) async {
-    var sheet = await ss.worksheetByTitle('pedidos');
+    sheetPedidos = await ss.worksheetByTitle('pedidos');
 
-    if (sheet == null) {
-      sheet = await ss.addWorksheet('pedidos');
+    if (sheetPedidos == null) {
+      sheetPedidos = await ss.addWorksheet('pedidos');
       // insert list in row #1
       final primeiraLinha = ['id', 'nome', 'numero', 'endereco', 'lista', 'total'];
-      await sheet.values.insertRow(1, primeiraLinha);
-      print(await sheet.values.row(1));
+      await sheetPedidos.values.insertRow(1, primeiraLinha);
+      print(await sheetPedidos.values.row(1));
 
       final primeiraColuna = ['0', '1', '2'];
-      await sheet.values.insertColumn(1, primeiraColuna, fromRow: 2);
-      print(await sheet.values.column(1, fromRow: 2));
+      await sheetPedidos.values.insertColumn(1, primeiraColuna, fromRow: 2);
+      print(await sheetPedidos.values.column(1, fromRow: 2));
 
       final segundaColuna = ['Tassio', 'Lily', 'Pedro'];
-      await sheet.values.insertColumnByKey('nome', segundaColuna);
-      print(await sheet.values.columnByKey('nome'));
+      await sheetPedidos.values.insertColumnByKey('nome', segundaColuna);
+      print(await sheetPedidos.values.columnByKey('nome'));
 
       final terceiraColuna = ['6399999999', '7199999999', '7199999999'];
-      await sheet.values.insertColumnByKey('numero', terceiraColuna);
-      print(await sheet.values.columnByKey('numero'));
+      await sheetPedidos.values.insertColumnByKey('numero', terceiraColuna);
+      print(await sheetPedidos.values.columnByKey('numero'));
 
       final enderecoColuna = ['Rua XX, XXX - Nova Cidade', 'Rua XX, XXX - Imbuí', 'Rua XX, XXX - Ondina'];
-      await sheet.values.insertColumnByKey('endereco', enderecoColuna);
-      print(await sheet.values.columnByKey('endereco'));
+      await sheetPedidos.values.insertColumnByKey('endereco', enderecoColuna);
+      print(await sheetPedidos.values.columnByKey('endereco'));
 
       final listaColuna = ['Pizza;X-burger', 'Pizza; Refri', 'Pizza;Suco'];
-      await sheet.values.insertColumnByKey('lista', listaColuna);
-      print(await sheet.values.columnByKey('lista'));
+      await sheetPedidos.values.insertColumnByKey('lista', listaColuna);
+      print(await sheetPedidos.values.columnByKey('lista'));
 
       final totalColuna = ['40', '50', '50.1'];
-      await sheet.values.insertColumnByKey('total', listaColuna);
-      print(await sheet.values.columnByKey('total'));
+      await sheetPedidos.values.insertColumnByKey('total', listaColuna);
+      print(await sheetPedidos.values.columnByKey('total'));
     }
 
-    return await sheet.values.allRows();
+    return await sheetPedidos.values.allRows();
   }
 
   static void carregarLista(List<List<String>>? lista) {
@@ -131,5 +134,10 @@ class DataBase {
     return listaProdutos;
   }
 
-  static void realizarPedido() {}
+  static void realizarPedido(String id, String nome, String numero, String endereco, String lista, String total) async {
+    Map ultimaLinha = await sheetPedidos.values.map.lastRow();
+    var id = int.parse(ultimaLinha["id"]);
+    int novo_id = id++;
+    await sheetPedidos.values.insertRow(novo_id, [novo_id, nome, numero, endereco, lista, total]);
+  }
 }
