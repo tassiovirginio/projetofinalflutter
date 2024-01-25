@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
+import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   var title;
   LoginScreenState(this.title);
+
+  static List<String> usuarioLogado = [];
+
+  TextEditingController usuarioController = TextEditingController();
+  TextEditingController senhaController = TextEditingController();
+
   @override
   Widget build(BuildContext) {
     return MaterialApp(
@@ -46,6 +53,7 @@ class LoginScreenState extends State<LoginScreen> {
                     Container(
                       margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextField(
+                        controller: usuarioController,
                         keyboardType: TextInputType.name,
                         style: const TextStyle(fontSize: 20, color: Colors.black),
                         decoration: getAuthenticationImputDecoration('Usuário'),
@@ -54,6 +62,7 @@ class LoginScreenState extends State<LoginScreen> {
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                       child: TextField(
+                        controller: senhaController,
                         keyboardType: TextInputType.name,
                         obscureText: true,
                         enableSuggestions: false,
@@ -71,7 +80,15 @@ class LoginScreenState extends State<LoginScreen> {
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
-                            Navigator.of(context).pushNamed(Routes.MENU.name);
+                            String usuario = usuarioController.text;
+                            String senha = senhaController.text;
+                            List<String> logado = DataBase.fazerLogin(usuario, senha);
+                            if (logado.length != 0) {
+                              usuarioLogado = logado;
+                              Navigator.of(context).pushNamed(Routes.MENU.name);
+                            } else {
+                              print("Usuário ou senha incorretos");
+                            }
                           },
                           child: const Text('Entrar', style: TextStyle(fontSize: 20, color: Colors.white))),
                     ),

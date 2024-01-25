@@ -24,8 +24,10 @@ class DataBase {
   static var ss;
   static var sheetProdutos;
   static var sheetPedidos;
+  static var sheetUsuarios;
   static List<List<String>>? listaProdutos;
   static List<List<String>>? listaPedidos;
+  static List<List<String>>? listaUsuarios;
 
   static carregarSheet() async {
     gsheets = GSheets(_credentials);
@@ -39,7 +41,11 @@ class DataBase {
 
     carregarLista(listaPedidos);
 
-    realizarPedido("11", "Tassio", "6399999999", "Rua XX, XXX - Nova Cidade", "Pizza;X-burger", "40");
+    listaUsuarios = await criarTabelaUsuarios(DataBase.ss);
+
+    carregarLista(listaUsuarios);
+
+    // realizarPedido("11", "Tassio", "6399999999", "Rua XX, XXX - Nova Cidade", "Pizza;X-burger", "40");
   }
 
   static Future<List<List<String>>> criarTabelaMenu(Spreadsheet ss) async {
@@ -112,6 +118,55 @@ class DataBase {
     return await sheetPedidos.values.allRows();
   }
 
+  static Future<List<List<String>>> criarTabelaUsuarios(Spreadsheet ss) async {
+    sheetUsuarios = await ss.worksheetByTitle('usuarios');
+
+    if (sheetUsuarios == null) {
+      sheetUsuarios = await ss.addWorksheet('usuarios');
+      // insert list in row #1
+      final primeiraLinha = ['id', 'nome', 'numero', 'endereco', 'login', 'senha'];
+      await sheetUsuarios.values.insertRow(1, primeiraLinha);
+      print(await sheetUsuarios.values.row(1));
+
+      final primeiraColuna = ['0', '1', '2'];
+      await sheetUsuarios.values.insertColumn(1, primeiraColuna, fromRow: 2);
+      print(await sheetUsuarios.values.column(1, fromRow: 2));
+
+      final segundaColuna = ['Tassio', 'Lily', 'Pedro'];
+      await sheetUsuarios.values.insertColumnByKey('nome', segundaColuna);
+      print(await sheetUsuarios.values.columnByKey('nome'));
+
+      final terceiraColuna = ['6399999999', '7199999999', '7199999999'];
+      await sheetUsuarios.values.insertColumnByKey('numero', terceiraColuna);
+      print(await sheetUsuarios.values.columnByKey('numero'));
+
+      final enderecoColuna = ['Rua XX, XXX - Nova Cidade', 'Rua XX, XXX - Imbuí', 'Rua XX, XXX - Ondina'];
+      await sheetUsuarios.values.insertColumnByKey('endereco', enderecoColuna);
+      print(await sheetUsuarios.values.columnByKey('endereco'));
+
+      final listaColuna = ['tassio', 'lily', 'pedro'];
+      await sheetUsuarios.values.insertColumnByKey('login', listaColuna);
+      print(await sheetUsuarios.values.columnByKey('login'));
+      await sheetUsuarios.values.insertColumnByKey('senha', listaColuna);
+      print(await sheetUsuarios.values.columnByKey('senha'));
+    }
+
+    return await sheetUsuarios.values.allRows();
+  }
+
+  static List<String> fazerLogin(String login, String senha) {
+    List<String> retorno = [];
+
+    listaUsuarios?.forEach((element) {
+      if (element[4] == login && element[5] == senha) {
+        print("Login realizado com sucesso!");
+        retorno = element;
+      }
+    });
+
+    return retorno;
+  }
+
   static void carregarLista(List<List<String>>? lista) {
     lista?.forEach((element) {
       print(element);
@@ -134,10 +189,14 @@ class DataBase {
     return listaProdutos;
   }
 
-  static void realizarPedido(String id, String nome, String numero, String endereco, String lista, String total) async {
+  static Future<List<String>> realizarPedido(
+      String id, String nome, String numero, String endereco, String lista, String total) async {
+    List<String> retorno = [];
     Map ultimaLinha = await sheetPedidos.values.map.lastRow();
     var id = int.parse(ultimaLinha["id"]);
     int novo_id = id++;
     await sheetPedidos.values.insertRow(novo_id, [novo_id, nome, numero, endereco, lista, total]);
+    retorno = [novo_id.toString(), nome, numero, endereco, lista, total];
+    return retorno;
   }
 }

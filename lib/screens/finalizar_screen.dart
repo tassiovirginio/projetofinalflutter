@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
+import 'package:projetofinalflutter/screens/login_screen.dart';
 
 class FinalizarScreen extends StatefulWidget {
   const FinalizarScreen({super.key, required this.title});
@@ -14,6 +16,10 @@ class FinalizarScreen extends StatefulWidget {
 class FinalizarScreenState extends State<FinalizarScreen> {
   FinalizarScreenState(this.title);
   var title;
+
+  String nome = LoginScreenState.usuarioLogado[1];
+  String numero = LoginScreenState.usuarioLogado[2];
+  String endereco = LoginScreenState.usuarioLogado[3];
 
   @override
   Widget build(BuildContext) {
@@ -54,7 +60,8 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    cardBig("flagcliente", "flagpedido", "flagvalortotal", Color.fromARGB(255, 164, 158, 141)),
+                    cardBig(ConfirmacaoScreenState.pedido[1], ConfirmacaoScreenState.pedido[0], "100",
+                        Color.fromARGB(255, 164, 158, 141)),
                   ],
                 )),
               ],

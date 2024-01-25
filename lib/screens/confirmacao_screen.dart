@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
 
 class ConfirmacaoScreen extends StatefulWidget {
@@ -16,6 +17,7 @@ class ConfirmacaoScreen extends StatefulWidget {
 class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
   ConfirmacaoScreenState(this.title);
   var title;
+  static var pedido = [];
 
   @override
   Widget build(BuildContext) {
@@ -115,7 +117,19 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
-                            onPressed: () {
+                            onPressed: () async {
+                              pedido = [
+                                "",
+                                LoginScreenState.usuarioLogado[1],
+                                LoginScreenState.usuarioLogado[2],
+                                LoginScreenState.usuarioLogado[3],
+                                MenuScreenState.carrinho.toString(),
+                                "100"
+                              ];
+                              List<String> lsitaPedidos = await DataBase.realizarPedido(
+                                  pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
+
+                              pedido = lsitaPedidos;
                               Navigator.of(context).pushNamed(Routes.FINALIZAR.name);
                             },
                             child: Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
