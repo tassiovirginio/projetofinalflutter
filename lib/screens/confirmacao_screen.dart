@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
+import 'package:projetofinalflutter/routes/routes.dart';
 
 class ConfirmacaoScreen extends StatefulWidget {
   const ConfirmacaoScreen({super.key, required this.title});
@@ -26,54 +27,111 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+        body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  this.title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+              children: <Widget>[
+                SizedBox(height: 20),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                      onPressed: () => {},
+                      child: Text(
+                        "Itens no carrinho: 12",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontFamily: 'Times New Roman',
+                            fontWeight: FontWeight.bold),
+                      )),
                 ),
-                Image.asset('lib/assets/logo.png', height: 100),
-              ],
-            ),
-            Column(
-              children: [
+                SizedBox(height: 20),
                 Text(
-                  "Pedido Feito com Sucesso",
+                  "Confirmação",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
                 ),
+                itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
+                itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
+                itemMenu("X-Tudo", "Pão, carne, queijo, ovo, bacon, alface, tomate e maionese", "R\$ 20,00"),
+                itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
+                SizedBox(height: 20),
                 Container(
+                    width: 400,
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    alignment: Alignment.bottomCenter,
+                    transformAlignment: Alignment.bottomCenter,
                     child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    cardBig("flagcliente", "flagpedido", "flagvalortotal", Color.fromARGB(255, 164, 158, 141)),
-                  ],
-                )),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                )),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                        SizedBox(width: 20),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.green,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                )),
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(Routes.FINALIZAR.name);
+                            },
+                            child: Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ],
+                    )),
               ],
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                      )),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
-            ),
-          ],
-        ),
+            )),
       ),
     );
   }
+}
+
+Widget itemMenu(String nome, String descricao, String preco) {
+  return Container(
+    margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+    width: 310,
+    height: 100,
+    child: Card(
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      color: Colors.white,
+      child: Column(children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
+          Text(
+            nome,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+          ),
+          Text(
+            preco,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+          ),
+          IconButton(onPressed: () => {}, icon: Icon(Icons.delete_sharp))
+        ]),
+        Row(
+          children: [
+            Container(
+              width: 300,
+              child: Text(
+                descricao,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+              ),
+            )
+          ],
+        )
+      ]),
+    ),
+  );
 }

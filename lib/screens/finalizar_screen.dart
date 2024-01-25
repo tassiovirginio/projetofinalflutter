@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
+import 'package:projetofinalflutter/routes/routes.dart';
 
 class FinalizarScreen extends StatefulWidget {
   const FinalizarScreen({super.key, required this.title});
@@ -67,7 +68,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(9.0)),
                       )),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pushNamed(Routes.LOGIN.name);
                   },
                   child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
             ),
