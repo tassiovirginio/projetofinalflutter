@@ -50,7 +50,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset('lib/assets/logo.png', height: 100),
+                Image.asset('lib/assets/logo.png', height: 130),
               ],
             ),
             Column(
@@ -60,6 +60,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 30),
                 Container(
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -81,7 +81,7 @@ class MenuScreenState extends State<MenuScreen> {
                         onPressed: () => {},
                         icon: Icon(
                           Icons.list,
-                          size: 50.0,
+                          size: 60.0,
                         )),
                     Text(
                       "Menu",
@@ -96,14 +96,22 @@ class MenuScreenState extends State<MenuScreen> {
                   )
                 ],
               ),
+              SizedBox(height: 40),
+              Text(
+                "Pratos",
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 32, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+              ),
               SizedBox(height: 20),
+              columnProdutos,
+              SizedBox(height: 15),
               Container(
                 alignment: Alignment.topRight,
                 child: TextButton(
                     onPressed: () => {print(valorTotal)},
                     child: Text(
-                      "Itens no carrinho: " +
-                          MenuScreenState.carrinho.length.toString() +
+                      "Itens no carrinho: " + 
+                          MenuScreenState.carrinho.length.toString() +"      "+
                           "\nValor Total: " +
                           valorTotal.toString(),
                       style: TextStyle(
@@ -113,14 +121,7 @@ class MenuScreenState extends State<MenuScreen> {
                           fontWeight: FontWeight.bold),
                     )),
               ),
-              SizedBox(height: 20),
-              Text(
-                "Pratos",
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 32, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-              ),
-              columnProdutos,
-              SizedBox(height: 20),
+              SizedBox(height: 15),
               Container(
                   margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: Row(
@@ -160,8 +161,8 @@ class MenuScreenState extends State<MenuScreen> {
 Widget itemMenu(String id, String nome, String descricao, String preco, Function() funcao) {
   return Container(
     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-    width: 330,
-    height: 120,
+    width: 350,
+    height: 110,
     child: Card(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
@@ -170,22 +171,23 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
           Text(
             nome,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
           Text(
-            preco,
+            "RS $preco",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: funcao, icon: Icon(Icons.add_shopping_cart))
+          IconButton(onPressed: funcao, icon: Icon(Icons.add_shopping_cart, size: 30))
         ]),
         Row(
           children: [
             Container(
-              width: 300,
+              margin: EdgeInsets.fromLTRB(30,0,0,0),
+              width: 200,
               child: Text(
                 descricao,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
                 style: TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
               ),
             )
