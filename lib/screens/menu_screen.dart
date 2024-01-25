@@ -168,8 +168,7 @@ Widget itemMenu(String nome, String descricao, String preco) {
 
 
 
-
-
+/*
 final List<String> pratosDeComida = ['Pasta Carbonara', 'Ceviche', 'Paella'];
 final List<String> valoresComida = ['25', '27', '50'];
 
@@ -206,3 +205,4 @@ Widget buildBebidas (BuildContext context) {
                       },
                     );
                   }
+*/

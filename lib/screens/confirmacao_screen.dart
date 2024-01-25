@@ -34,6 +34,15 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+              Row( 
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                    Text("Confirmação",
+                    textAlign: TextAlign.center, style: TextStyle(fontSize: 38,fontFamily: 'Times New Roman',fontStyle: FontStyle.italic), ),
+                    Image.asset('lib/assets/logo.png',height: 80),
+                  ],
+                ),
                 SizedBox(height: 20),
                 Container(
                   alignment: Alignment.topRight,
