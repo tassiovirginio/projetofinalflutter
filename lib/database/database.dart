@@ -193,8 +193,7 @@ class DataBase {
       String id, String nome, String numero, String endereco, String lista, String total) async {
     List<String> retorno = [];
     Map ultimaLinha = await sheetPedidos.values.map.lastRow();
-    var id = int.parse(ultimaLinha["id"]);
-    int novo_id = id++;
+    int novo_id = int.parse(ultimaLinha["id"]) + 1;
     await sheetPedidos.values.insertRow(novo_id, [novo_id, nome, numero, endereco, lista, total]);
     retorno = [novo_id.toString(), nome, numero, endereco, lista, total];
     return retorno;
