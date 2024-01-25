@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/screens/menu_screen.dart';
 
 class ConfirmacaoScreen extends StatefulWidget {
   const ConfirmacaoScreen({super.key, required this.title});
@@ -34,13 +35,16 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-              Row( 
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                    Text("Confirmação",
-                    textAlign: TextAlign.center, style: TextStyle(fontSize: 38,fontFamily: 'Times New Roman',fontStyle: FontStyle.italic), ),
-                    Image.asset('lib/assets/logo.png',height: 80),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Confirmação",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                    ),
+                    Image.asset('lib/assets/logo.png', height: 80),
                   ],
                 ),
                 SizedBox(height: 20),
@@ -49,7 +53,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   child: TextButton(
                       onPressed: () => {},
                       child: Text(
-                        "Itens no carrinho: 12",
+                        "Itens no carrinho: " + MenuScreenState.carrinho.length.toString(),
                         style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
