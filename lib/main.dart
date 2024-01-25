@@ -12,7 +12,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-var title = 'Sabores do Mundo';
+var title = 'Restaurante Sabores do Mundo';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

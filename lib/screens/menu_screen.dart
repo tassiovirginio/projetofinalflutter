@@ -47,6 +47,23 @@ class MenuScreenState extends State<MenuScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              Row( 
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(children: [
+                      IconButton(
+                        onPressed: () => {},
+                        icon: Icon(Icons.list, size: 50.0,),
+                      ),
+                      Text("Menu",
+                      textAlign: TextAlign.center, style: TextStyle(fontSize: 38,fontFamily: 'Times New Roman',fontStyle: FontStyle.italic), ),
+                    ]
+                  ),
+                  Column(children: [
+                    Image.asset('lib/assets/logo.png',height: 80),
+                  ],)
+                ],),
               SizedBox(height: 20),
               Container(
                 alignment: Alignment.topRight,
@@ -62,11 +79,9 @@ class MenuScreenState extends State<MenuScreen> {
                     )),
               ),
               SizedBox(height: 20),
-              Text(
-                "MENU",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-              ),
+              Text("Pratos",
+                  textAlign: TextAlign.start, style: TextStyle(fontSize: 32,fontFamily: 'Times New Roman',fontWeight: FontWeight.bold), 
+                ),
               columnProdutos,
               // itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
               // itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
@@ -74,9 +89,9 @@ class MenuScreenState extends State<MenuScreen> {
               // itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
               SizedBox(height: 20),
               Container(
-                  width: 400,
-                  margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                  margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -109,16 +124,19 @@ class MenuScreenState extends State<MenuScreen> {
   }
 }
 
+
+
+                
 Widget itemMenu(String nome, String descricao, String preco) {
   return Container(
     margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-    width: 310,
-    height: 100,
+    width: 330,
+    height: 80,
     child: Card(
       margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
       child: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
             nome,
             textAlign: TextAlign.center,
@@ -147,3 +165,44 @@ Widget itemMenu(String nome, String descricao, String preco) {
     ),
   );
 }
+
+
+
+
+
+final List<String> pratosDeComida = ['Pasta Carbonara', 'Ceviche', 'Paella'];
+final List<String> valoresComida = ['25', '27', '50'];
+
+Widget buildPratos (BuildContext context) {
+    return ListView.builder(
+                      itemCount: pratosDeComida.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            leading: Icon(Icons.add_circle), 
+                            title: Text(pratosDeComida[index]),
+                            subtitle: Text('\$${valoresComida[index]}'),
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+
+final List<String> bedidas = ['Água', 'Suco', 'Refrigerante'];
+final List<String> valoresBebidas = ['25', '27', '50'];
+
+Widget buildBebidas (BuildContext context) {
+    return ListView.builder(
+                      itemCount: bedidas.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          child: ListTile(
+                            leading: Icon(Icons.add_circle), 
+                            title: Text(bedidas[index]),
+                            subtitle: Text('\$${valoresBebidas[index]}'),
+                          ),
+                        );
+                      },
+                    );
+                  }
