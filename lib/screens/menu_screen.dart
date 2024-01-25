@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/database/database.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.title});
@@ -17,6 +18,18 @@ class MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext) {
+    List<List<String>>? listaProdutos = DataBase.listaProdutos;
+
+    List<Widget> listaProdutosWidget = [];
+
+    listaProdutos?.forEach((element) {
+      listaProdutosWidget.add(itemMenu(element[1], element[2], element[3]));
+    });
+
+    Column columnProdutos = Column(
+      children: listaProdutosWidget,
+    );
+
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 185, 177, 155),
@@ -54,10 +67,11 @@ class MenuScreenState extends State<MenuScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
               ),
-              itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
-              itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
-              itemMenu("X-Tudo", "Pão, carne, queijo, ovo, bacon, alface, tomate e maionese", "R\$ 20,00"),
-              itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
+              columnProdutos,
+              // itemMenu("Coca-Cola", "Coca-Cola 2L", "R\$ 10,00"),
+              // itemMenu("Suco", "Suco de laranja", "R\$ 5,00"),
+              // itemMenu("X-Tudo", "Pão, carne, queijo, ovo, bacon, alface, tomate e maionese", "R\$ 20,00"),
+              // itemMenu("Pizza", "Pizza de calabresa", "R\$ 30,00"),
               SizedBox(height: 20),
               Container(
                   width: 400,

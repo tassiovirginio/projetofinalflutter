@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/finalizar_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
 import 'package:projetofinalflutter/screens/my_home_screen.dart';
@@ -6,7 +7,10 @@ import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 
-void main() => runApp(const MyApp());
+void main() async {
+  await DataBase.carregarSheet();
+  runApp(const MyApp());
+}
 
 var title = 'Sabores do Mundo';
 
