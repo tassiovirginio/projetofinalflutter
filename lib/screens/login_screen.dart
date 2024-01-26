@@ -35,16 +35,19 @@ class LoginScreenState extends State<LoginScreen> {
           centerTitle: true,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            SizedBox(height: 30),
             Image.asset('lib/assets/logo.png', height: 150),
+            SizedBox(height: 40),
             Text(
               this.title,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, color: color_font),
             ),
+            SizedBox(height: 40),
             Container(
               margin: EdgeInsets.all(10.0),
               width: 100,
@@ -74,7 +77,7 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(100, 20, 100, 0),
+                      margin: EdgeInsets.fromLTRB(100, 40, 100, 0),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: color_button,

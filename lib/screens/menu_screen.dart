@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/database/database.dart';
