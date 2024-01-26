@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/utils/utils.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required this.title});
@@ -25,11 +26,11 @@ class LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 185, 177, 155),
+        backgroundColor: color_background,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 232, 231, 229),
+          backgroundColor: color_background,
           title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-          elevation: 70,
+          elevation: 90,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
@@ -41,7 +42,8 @@ class LoginScreenState extends State<LoginScreen> {
             Text(
               this.title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+              style: TextStyle(
+                  fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, color: color_font),
             ),
             Container(
               margin: EdgeInsets.all(10.0),
@@ -72,10 +74,10 @@ class LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                      margin: EdgeInsets.fromLTRB(100, 20, 100, 0),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
+                              primary: color_button,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),
@@ -90,7 +92,7 @@ class LoginScreenState extends State<LoginScreen> {
                               print("Usuário ou senha incorretos");
                             }
                           },
-                          child: const Text('Entrar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                          child: const Text('Entrar', style: TextStyle(fontSize: 20, color: color_button_text))),
                     ),
                   ]),
             ),

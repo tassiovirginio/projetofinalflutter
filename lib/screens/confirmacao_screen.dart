@@ -4,6 +4,7 @@ import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
+import 'package:projetofinalflutter/utils/utils.dart';
 
 class ConfirmacaoScreen extends StatefulWidget {
   const ConfirmacaoScreen({super.key, required this.title});
@@ -46,7 +47,6 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
           item.valor,
           () => {
                 setState(() {
-                  // MenuScreenState.carrinho.removeWhere((i) => i == produto);
                   MenuScreenState.carrinho.remove(item);
                 })
               }));
@@ -56,9 +56,9 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 185, 177, 155),
+        backgroundColor: color_background,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 232, 231, 229),
+          backgroundColor: color_background,
           title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
@@ -90,7 +90,8 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                       onPressed: () => {},
                       child: Text(
                         "Itens no carrinho: " +
-                            MenuScreenState.carrinho.length.toString()  +"      "+
+                            MenuScreenState.carrinho.length.toString() +
+                            "      " +
                             "\nValor Total: " +
                             valorTotal.toString(),
                         style: TextStyle(
@@ -113,7 +114,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.green,
+                                primary: color_button,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
@@ -124,7 +125,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                         SizedBox(width: 20),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: Colors.green,
+                                primary: color_button,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
@@ -179,12 +180,12 @@ Widget itemMenu(String nome, String descricao, String preco, Function() funcao) 
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: () => funcao(), icon: Icon(Icons.delete_sharp, size:30))
+          IconButton(onPressed: () => funcao(), icon: Icon(Icons.delete_sharp, size: 30))
         ]),
         Row(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(30,0,0,0),
+              margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
               width: 200,
               child: Text(
                 descricao,

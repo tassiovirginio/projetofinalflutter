@@ -4,6 +4,7 @@ import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
+import 'package:projetofinalflutter/utils/utils.dart';
 
 class FinalizarScreen extends StatefulWidget {
   const FinalizarScreen({super.key, required this.title});
@@ -34,16 +35,16 @@ class FinalizarScreenState extends State<FinalizarScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 185, 177, 155),
+        backgroundColor: color_background,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 232, 231, 229),
+          backgroundColor: color_background,
           title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
@@ -53,6 +54,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                 Image.asset('lib/assets/logo.png', height: 130),
               ],
             ),
+            SizedBox(height: 50),
             Column(
               children: [
                 Text(
@@ -60,7 +62,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 50),
                 Container(
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -71,6 +73,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                 )),
               ],
             ),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -78,7 +81,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          primary: color_button,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
@@ -93,7 +96,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          primary: color_button,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),

@@ -3,6 +3,7 @@ import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/database/database.dart';
+import 'package:projetofinalflutter/utils/utils.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.title});
@@ -57,100 +58,98 @@ class MenuScreenState extends State<MenuScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 185, 177, 155),
+        backgroundColor: color_background,
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 232, 231, 229),
+          backgroundColor: color_background,
           title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-          elevation: 70,
+          elevation: 90,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Container(
           height: double.infinity,
           width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(children: [
-                    IconButton(
-                        onPressed: () => {},
-                        icon: Icon(
-                          Icons.list,
-                          size: 60.0,
-                        )),
-                    Text(
-                      "Menu",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
-                    ),
-                  ]),
-                  Column(
-                    children: [
-                      Image.asset('lib/assets/logo.png', height: 80),
-                    ],
-                  )
-                ],
-              ),
-              SizedBox(height: 40),
-              Text(
-                "Pratos",
-                textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 32, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 20),
-              columnProdutos,
-              SizedBox(height: 15),
-              Container(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                    onPressed: () => {print(valorTotal)},
-                    child: Text(
-                      "Itens no carrinho: " + 
-                          MenuScreenState.carrinho.length.toString() +"      "+
-                          "\nValor Total: " +
-                          valorTotal.toString(),
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontFamily: 'Times New Roman',
-                          fontWeight: FontWeight.bold),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(children: [
+                      IconButton(
+                          onPressed: () => {},
+                          icon: Icon(
+                            Icons.list,
+                            size: 60.0,
+                          )),
+                      Text(
+                        "Menu",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                      ),
+                    ]),
+                    Column(
+                      children: [
+                        Image.asset('lib/assets/logo.png', height: 80),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(height: 40),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: TextButton(
+                      onPressed: () => {print(valorTotal)},
+                      child: Text(
+                        "Itens no carrinho: " +
+                            MenuScreenState.carrinho.length.toString() +
+                            "      " +
+                            "\nValor Total: " +
+                            valorTotal.toString(),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontFamily: 'Times New Roman',
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
+                SizedBox(height: 20),
+                columnProdutos,
+                SizedBox(height: 15),
+                SizedBox(height: 15),
+                Container(
+                    margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: color_button,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                )),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                        SizedBox(width: 20),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: color_button,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                )),
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
+                            },
+                            child: Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      ],
                     )),
-              ),
-              SizedBox(height: 15),
-              Container(
-                  margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                              )),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
-                      SizedBox(width: 20),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.green,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                              )),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
-                          },
-                          child: Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
-                    ],
-                  )),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -183,7 +182,7 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
         Row(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(30,0,0,0),
+              margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
               width: 200,
               child: Text(
                 descricao,
@@ -197,44 +196,3 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
     ),
   );
 }
-
-
-
-/*
-final List<String> pratosDeComida = ['Pasta Carbonara', 'Ceviche', 'Paella'];
-final List<String> valoresComida = ['25', '27', '50'];
-
-Widget buildPratos (BuildContext context) {
-    return ListView.builder(
-                      itemCount: pratosDeComida.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            leading: Icon(Icons.add_circle), 
-                            title: Text(pratosDeComida[index]),
-                            subtitle: Text('\$${valoresComida[index]}'),
-                          ),
-                        );
-                      },
-                    );
-                  }
-
-
-final List<String> bedidas = ['Água', 'Suco', 'Refrigerante'];
-final List<String> valoresBebidas = ['25', '27', '50'];
-
-Widget buildBebidas (BuildContext context) {
-    return ListView.builder(
-                      itemCount: bedidas.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          child: ListTile(
-                            leading: Icon(Icons.add_circle), 
-                            title: Text(bedidas[index]),
-                            subtitle: Text('\$${valoresBebidas[index]}'),
-                          ),
-                        );
-                      },
-                    );
-                  }
-*/
