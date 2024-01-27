@@ -170,11 +170,7 @@ class DataBase {
     return retorno;
   }
 
-  static void carregarLista(List<List<String>>? lista) {
-    lista?.forEach((element) {
-      print(element);
-    });
-  }
+  static void carregarLista(List<List<String>>? lista) => lista?.forEach(print);
 
   static List<List<String>>? getPedidos() {
     while (listaPedidos == null) {
