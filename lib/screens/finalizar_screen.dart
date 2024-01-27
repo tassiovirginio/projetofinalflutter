@@ -17,8 +17,8 @@ class FinalizarScreen extends StatefulWidget {
 }
 
 class FinalizarScreenState extends State<FinalizarScreen> {
-  FinalizarScreenState(this.title);
   var title;
+  FinalizarScreenState(this.title);
 
   String nome = LoginScreenState.usuarioLogado[1];
   String numero = LoginScreenState.usuarioLogado[2];
@@ -36,9 +36,9 @@ class FinalizarScreenState extends State<FinalizarScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: color_background,
+        backgroundColor: colorBackground,
         appBar: AppBar(
-          backgroundColor: color_background,
+          backgroundColor: colorBackground,
           title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
@@ -58,34 +58,33 @@ class FinalizarScreenState extends State<FinalizarScreen> {
             SizedBox(height: 50),
             Column(
               children: [
-                Text(
+                const Text(
                   "Pedido Feito com Sucesso",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 50),
-                Container(
-                    child: Row(
+                const SizedBox(height: 50),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     cardBig(
                         cliente: ConfirmacaoScreenState.pedido[1],
                         pedido: ConfirmacaoScreenState.pedido[0],
                         total: valorTotal.toString(),
-                        color: Color.fromARGB(255, 164, 158, 141)),
+                        color: const Color.fromARGB(255, 164, 158, 141)),
                   ],
-                )),
+                ),
               ],
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: color_button,
+                          primary: colorButton,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
@@ -94,13 +93,13 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => MenuScreen(title: title));
                       },
-                      child: Text('Novo Pedido', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      child: const Text('Novo Pedido', style: TextStyle(fontSize: 20, color: Colors.white))),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: color_button,
+                          primary: colorButton,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
@@ -110,7 +109,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },
-                      child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      child: const Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
                 ),
               ],
             )

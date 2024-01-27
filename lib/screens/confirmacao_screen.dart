@@ -57,10 +57,10 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: color_background,
+        backgroundColor: colorBackground,
         appBar: AppBar(
-          backgroundColor: color_background,
-          title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          backgroundColor: colorBackground,
+          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
@@ -84,30 +84,26 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                     Image.asset('lib/assets/logo.png', height: 80),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Container(
                   alignment: Alignment.topRight,
                   child: TextButton(
                       onPressed: () => {},
                       child: Text(
-                        "Itens no carrinho: " +
-                            MenuScreenState.carrinho.length.toString() +
-                            "      " +
-                            "\nValor Total: " +
-                            valorTotal.toString(),
-                        style: TextStyle(
+                        "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal.toString()}",
+                        style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                             fontFamily: 'Times New Roman',
                             fontWeight: FontWeight.bold),
                       )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 colunacarrinho,
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Container(
                     width: 400,
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     alignment: Alignment.bottomCenter,
                     transformAlignment: Alignment.bottomCenter,
                     child: Row(
@@ -115,18 +111,18 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: color_button,
+                                primary: colorButton,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
                               Get.back();
                             },
-                            child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
-                        SizedBox(width: 20),
+                            child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                        const SizedBox(width: 20),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: color_button,
+                                primary: colorButton,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
@@ -157,7 +153,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                 Get.snackbar("Erro", "Carrinho vazio...");
                               }
                             },
-                            child: Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                            child: const Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
                       ],
                     )),
               ],

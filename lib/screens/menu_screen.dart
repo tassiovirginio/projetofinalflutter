@@ -59,10 +59,10 @@ class MenuScreenState extends State<MenuScreen> {
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: color_background,
+        backgroundColor: colorBackground,
         appBar: AppBar(
-          backgroundColor: color_background,
-          title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          backgroundColor: colorBackground,
+          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 90,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
@@ -80,8 +80,8 @@ class MenuScreenState extends State<MenuScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(children: [
-                      SizedBox(width: 20),
-                      Text(
+                      const SizedBox(width: 20),
+                      const Text(
                         "Menu",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
@@ -94,58 +94,54 @@ class MenuScreenState extends State<MenuScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Container(
                   alignment: Alignment.topRight,
                   child: TextButton(
                       onPressed: () => {print(valorTotal)},
                       child: Text(
-                        "Itens no carrinho: " +
-                            MenuScreenState.carrinho.length.toString() +
-                            "      " +
-                            "\nValor Total: " +
-                            valorTotal.toString(),
-                        style: TextStyle(
+                        "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}",
+                        style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
                             fontFamily: 'Times New Roman',
                             fontWeight: FontWeight.bold),
                       )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 columnProdutos,
-                SizedBox(height: 15),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
-                    margin: EdgeInsets.fromLTRB(50, 20, 50, 0),
+                    margin: const EdgeInsets.fromLTRB(50, 20, 50, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: color_button,
+                                primary: colorButton,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
                               Get.back();
                             },
-                            child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
-                        SizedBox(width: 20),
+                            child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                        const SizedBox(width: 20),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: color_button,
+                                primary: colorButton,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
-                              if (carrinho.length > 0) {
+                              if (carrinho.isNotEmpty) {
                                 Get.to(() => ConfirmacaoScreen(title: title));
                               } else {
                                 Get.snackbar("Erro", "Carrinho vazio...");
                               }
                             },
-                            child: Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
+                            child: const Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
                       ],
                     )),
               ],
@@ -163,31 +159,31 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
     width: 350,
     height: 110,
     child: Card(
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
       child: Column(children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
             nome,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
           Text(
             "RS $preco",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
           IconButton(onPressed: funcao, icon: Icon(Icons.add_shopping_cart, size: 30))
         ]),
         Row(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+              margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
               width: 200,
               child: Text(
                 descricao,
                 textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
               ),
             )
           ],
