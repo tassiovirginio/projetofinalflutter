@@ -88,31 +88,31 @@ class DataBase {
       // insert list in row #1
       final primeiraLinha = ['id', 'nome', 'numero', 'endereco', 'lista', 'total'];
       await sheetPedidos.values.insertRow(1, primeiraLinha);
-      print(await sheetPedidos.values.row(1));
+      // print(await sheetPedidos.values.row(1));
 
       final primeiraColuna = ['0', '1', '2'];
       await sheetPedidos.values.insertColumn(1, primeiraColuna, fromRow: 2);
-      print(await sheetPedidos.values.column(1, fromRow: 2));
+      // print(await sheetPedidos.values.column(1, fromRow: 2));
 
       final segundaColuna = ['Tassio', 'Lily', 'Pedro'];
       await sheetPedidos.values.insertColumnByKey('nome', segundaColuna);
-      print(await sheetPedidos.values.columnByKey('nome'));
+      // print(await sheetPedidos.values.columnByKey('nome'));
 
       final terceiraColuna = ['6399999999', '7199999999', '7199999999'];
       await sheetPedidos.values.insertColumnByKey('numero', terceiraColuna);
-      print(await sheetPedidos.values.columnByKey('numero'));
+      // print(await sheetPedidos.values.columnByKey('numero'));
 
       final enderecoColuna = ['Rua XX, XXX - Nova Cidade', 'Rua XX, XXX - Imbuí', 'Rua XX, XXX - Ondina'];
       await sheetPedidos.values.insertColumnByKey('endereco', enderecoColuna);
-      print(await sheetPedidos.values.columnByKey('endereco'));
+      // print(await sheetPedidos.values.columnByKey('endereco'));
 
       final listaColuna = ['Pizza;X-burger', 'Pizza; Refri', 'Pizza;Suco'];
       await sheetPedidos.values.insertColumnByKey('lista', listaColuna);
-      print(await sheetPedidos.values.columnByKey('lista'));
+      // print(await sheetPedidos.values.columnByKey('lista'));
 
       final totalColuna = ['40', '50', '50.1'];
-      await sheetPedidos.values.insertColumnByKey('total', listaColuna);
-      print(await sheetPedidos.values.columnByKey('total'));
+      await sheetPedidos.values.insertColumnByKey('total', totalColuna);
+      // print(await sheetPedidos.values.columnByKey('total'));
     }
 
     return await sheetPedidos.values.allRows();
@@ -126,43 +126,39 @@ class DataBase {
       // insert list in row #1
       final primeiraLinha = ['id', 'nome', 'numero', 'endereco', 'login', 'senha'];
       await sheetUsuarios.values.insertRow(1, primeiraLinha);
-      print(await sheetUsuarios.values.row(1));
+      // print(await sheetUsuarios.values.row(1));
 
       final primeiraColuna = ['0', '1', '2'];
       await sheetUsuarios.values.insertColumn(1, primeiraColuna, fromRow: 2);
-      print(await sheetUsuarios.values.column(1, fromRow: 2));
+      // print(await sheetUsuarios.values.column(1, fromRow: 2));
 
       final segundaColuna = ['Tassio', 'Lily', 'Pedro'];
       await sheetUsuarios.values.insertColumnByKey('nome', segundaColuna);
-      print(await sheetUsuarios.values.columnByKey('nome'));
+      // print(await sheetUsuarios.values.columnByKey('nome'));
 
       final terceiraColuna = ['6399999999', '7199999999', '7199999999'];
       await sheetUsuarios.values.insertColumnByKey('numero', terceiraColuna);
-      print(await sheetUsuarios.values.columnByKey('numero'));
+      // print(await sheetUsuarios.values.columnByKey('numero'));
 
       final enderecoColuna = ['Rua XX, XXX - Nova Cidade', 'Rua XX, XXX - Imbuí', 'Rua XX, XXX - Ondina'];
       await sheetUsuarios.values.insertColumnByKey('endereco', enderecoColuna);
-      print(await sheetUsuarios.values.columnByKey('endereco'));
+      // print(await sheetUsuarios.values.columnByKey('endereco'));
 
       final listaColuna = ['tassio', 'lily', 'pedro'];
       await sheetUsuarios.values.insertColumnByKey('login', listaColuna);
-      print(await sheetUsuarios.values.columnByKey('login'));
+      // print(await sheetUsuarios.values.columnByKey('login'));
       await sheetUsuarios.values.insertColumnByKey('senha', listaColuna);
-      print(await sheetUsuarios.values.columnByKey('senha'));
+      // print(await sheetUsuarios.values.columnByKey('senha'));
     }
 
     return await sheetUsuarios.values.allRows();
   }
 
   static List<String> fazerLogin(String login, String senha) {
-    print("Fazer Login....");
     List<String> retorno = [];
-
-    print(listaUsuarios);
 
     listaUsuarios?.forEach((element) {
       if (element[4] == login && element[5] == senha) {
-        print("Login realizado com sucesso!");
         retorno = element;
       }
     });
@@ -176,7 +172,6 @@ class DataBase {
     while (listaPedidos == null) {
       sleep(Duration(seconds: 1));
     }
-    print("-----------------------");
     return listaPedidos;
   }
 
@@ -184,7 +179,6 @@ class DataBase {
     while (listaProdutos == null) {
       sleep(Duration(seconds: 1));
     }
-    print("-----------------------");
     return listaProdutos;
   }
 
