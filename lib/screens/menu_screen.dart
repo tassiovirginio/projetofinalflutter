@@ -23,7 +23,7 @@ class MenuScreenState extends State<MenuScreen> {
   static double valorTotal = 0;
 
   @override
-  Widget build(BuildContext) {
+  Widget build(BuildContext context) {
     listaProdutos = DataBase.listaProdutos;
     List<Widget> listaProdutosWidget = [];
 
@@ -78,12 +78,7 @@ class MenuScreenState extends State<MenuScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(children: [
-                      IconButton(
-                          onPressed: () => {},
-                          icon: Icon(
-                            Icons.list,
-                            size: 60.0,
-                          )),
+                      SizedBox(width: 20),
                       Text(
                         "Menu",
                         textAlign: TextAlign.center,
@@ -142,7 +137,11 @@ class MenuScreenState extends State<MenuScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
-                              Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
+                              if (carrinho.length > 0) {
+                                Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
+                              } else {
+                                _exibirDialogo();
+                              }
                             },
                             child: Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
                       ],
@@ -152,6 +151,18 @@ class MenuScreenState extends State<MenuScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _exibirDialogo() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: color_button,
+          content: Text("Carrinho vazio...", style: TextStyle(fontSize: 20, color: Colors.white)),
+        );
+      },
     );
   }
 }

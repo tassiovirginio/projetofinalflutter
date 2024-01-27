@@ -129,25 +129,31 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () async {
-                              List<String> listaItensId = [];
+                              if (MenuScreenState.carrinho.length > 0) {
+                                Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
 
-                              MenuScreenState.carrinho.forEach((item) {
-                                listaItensId.add(item.name);
-                              });
+                                List<String> listaItensId = [];
 
-                              pedido = [
-                                "",
-                                LoginScreenState.usuarioLogado[1],
-                                LoginScreenState.usuarioLogado[2],
-                                LoginScreenState.usuarioLogado[3],
-                                listaItensId.toString(),
-                                valorTotal.toString()
-                              ];
-                              List<String> lsitaPedidos = await DataBase.realizarPedido(
-                                  pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
+                                MenuScreenState.carrinho.forEach((item) {
+                                  listaItensId.add(item.name);
+                                });
 
-                              pedido = lsitaPedidos;
-                              Navigator.of(context).pushNamed(Routes.FINALIZAR.name);
+                                pedido = [
+                                  "",
+                                  LoginScreenState.usuarioLogado[1],
+                                  LoginScreenState.usuarioLogado[2],
+                                  LoginScreenState.usuarioLogado[3],
+                                  listaItensId.toString(),
+                                  valorTotal.toString()
+                                ];
+                                List<String> lsitaPedidos = await DataBase.realizarPedido(
+                                    pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
+
+                                pedido = lsitaPedidos;
+                                Navigator.of(context).pushNamed(Routes.FINALIZAR.name);
+                              } else {
+                                _exibirDialogo();
+                              }
                             },
                             child: Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
                       ],
@@ -155,6 +161,18 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
               ],
             )),
       ),
+    );
+  }
+
+  void _exibirDialogo() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: color_button,
+          content: Text("Carrinho vazio...", style: TextStyle(fontSize: 20, color: Colors.white)),
+        );
+      },
     );
   }
 }
