@@ -155,7 +155,10 @@ class DataBase {
   }
 
   static List<String> fazerLogin(String login, String senha) {
+    print("Fazer Login....");
     List<String> retorno = [];
+
+    print(listaUsuarios);
 
     listaUsuarios?.forEach((element) {
       if (element[4] == login && element[5] == senha) {

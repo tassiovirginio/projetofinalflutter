@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
 import 'package:projetofinalflutter/database/database.dart';
-import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/screens/menu_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
@@ -93,9 +94,9 @@ class LoginScreenState extends State<LoginScreen> {
                             List<String> logado = DataBase.fazerLogin(usuario, senhaMD5);
                             if (logado.length != 0) {
                               usuarioLogado = logado;
-                              Navigator.of(context).pushNamed(Routes.MENU.name);
+                              Get.to(() => MenuScreen(title: title));
                             } else {
-                              _exibirDialogo();
+                              Get.snackbar("Erro", "Usuário ou senha inválidos");
                             }
                           },
                           child: const Text('Entrar', style: TextStyle(fontSize: 20, color: color_button_text))),
@@ -105,18 +106,6 @@ class LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  void _exibirDialogo() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: color_button,
-          content: Text("Usuário ou senha incorretos", style: TextStyle(fontSize: 20, color: Colors.white)),
-        );
-      },
     );
   }
 }

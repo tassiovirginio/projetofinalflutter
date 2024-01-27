@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
-import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
@@ -67,8 +68,11 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    cardBig(ConfirmacaoScreenState.pedido[1], ConfirmacaoScreenState.pedido[0], valorTotal.toString(),
-                        Color.fromARGB(255, 164, 158, 141)),
+                    cardBig(
+                        cliente: ConfirmacaoScreenState.pedido[1],
+                        pedido: ConfirmacaoScreenState.pedido[0],
+                        total: valorTotal.toString(),
+                        color: Color.fromARGB(255, 164, 158, 141)),
                   ],
                 )),
               ],
@@ -88,7 +92,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                       onPressed: () {
                         MenuScreenState.carrinho = [];
                         ConfirmacaoScreenState.pedido = [];
-                        Navigator.of(context).pushNamed(Routes.MENU.name);
+                        Get.to(() => MenuScreen(title: title));
                       },
                       child: Text('Novo Pedido', style: TextStyle(fontSize: 20, color: Colors.white))),
                 ),
@@ -104,8 +108,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         LoginScreenState.usuarioLogado = [];
                         MenuScreenState.carrinho = [];
                         ConfirmacaoScreenState.pedido = [];
-
-                        Navigator.of(context).pushNamed(Routes.LOGIN.name);
+                        Get.to(() => LoginScreen(title: title));
                       },
                       child: Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
                 ),

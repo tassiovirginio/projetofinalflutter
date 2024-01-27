@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/database/database.dart';
-import 'package:projetofinalflutter/routes/routes.dart';
+import 'package:projetofinalflutter/screens/finalizar_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
@@ -118,7 +120,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Get.back();
                             },
                             child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
                         SizedBox(width: 20),
@@ -130,7 +132,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                 )),
                             onPressed: () async {
                               if (MenuScreenState.carrinho.length > 0) {
-                                Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
+                                Get.to(() => ConfirmacaoScreen(title: title));
 
                                 List<String> listaItensId = [];
 
@@ -150,9 +152,9 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                     pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
 
                                 pedido = lsitaPedidos;
-                                Navigator.of(context).pushNamed(Routes.FINALIZAR.name);
+                                Get.to(() => FinalizarScreen(title: title));
                               } else {
-                                _exibirDialogo();
+                                Get.snackbar("Erro", "Carrinho vazio...");
                               }
                             },
                             child: Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
@@ -161,18 +163,6 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
               ],
             )),
       ),
-    );
-  }
-
-  void _exibirDialogo() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: color_button,
-          content: Text("Carrinho vazio...", style: TextStyle(fontSize: 20, color: Colors.white)),
-        );
-      },
     );
   }
 }

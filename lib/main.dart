@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
-import 'package:projetofinalflutter/routes/routes.dart';
 
 void main() async {
   await DataBase.carregarSheet();
-  runApp(const MyApp());
+  runApp(const GetMaterialApp(home: MyApp()));
 }
 
 var title = 'Restaurante Sabores do Mundo';
@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: LoginScreen(title: title),
-      routes: myroutes,
     );
   }
 }

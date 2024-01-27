@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget cardBig(String cliente, String pedido, String total, Color color) {
+Widget cardBig({required String cliente, required String pedido, required String total, required Color color}) {
   return Card(
       color: color,
       child: Container(
@@ -20,7 +20,7 @@ Widget cardBig(String cliente, String pedido, String total, Color color) {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               Text(
-                "Total:         RS $total",
+                "Total:         R\$ $total",
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
             ]),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/models/item.dart';
-import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/database/database.dart';
+import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -126,7 +128,7 @@ class MenuScreenState extends State<MenuScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Get.back();
                             },
                             child: Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
                         SizedBox(width: 20),
@@ -138,9 +140,9 @@ class MenuScreenState extends State<MenuScreen> {
                                 )),
                             onPressed: () {
                               if (carrinho.length > 0) {
-                                Navigator.of(context).pushNamed(Routes.CONFIRMACAO.name);
+                                Get.to(() => ConfirmacaoScreen(title: title));
                               } else {
-                                _exibirDialogo();
+                                Get.snackbar("Erro", "Carrinho vazio...");
                               }
                             },
                             child: Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
@@ -151,18 +153,6 @@ class MenuScreenState extends State<MenuScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  void _exibirDialogo() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: color_button,
-          content: Text("Carrinho vazio...", style: TextStyle(fontSize: 20, color: Colors.white)),
-        );
-      },
     );
   }
 }
