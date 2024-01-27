@@ -3,6 +3,8 @@ import 'package:projetofinalflutter/components/authentication_imput_decoration.d
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/routes/routes.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required this.title});
@@ -87,12 +89,13 @@ class LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             String usuario = usuarioController.text;
                             String senha = senhaController.text;
-                            List<String> logado = DataBase.fazerLogin(usuario, senha);
+                            String senhaMD5 = md5.convert(utf8.encode(senha)).toString();
+                            List<String> logado = DataBase.fazerLogin(usuario, senhaMD5);
                             if (logado.length != 0) {
                               usuarioLogado = logado;
                               Navigator.of(context).pushNamed(Routes.MENU.name);
                             } else {
-                              print("Usuário ou senha incorretos");
+                              _exibirDialogo();
                             }
                           },
                           child: const Text('Entrar', style: TextStyle(fontSize: 20, color: color_button_text))),
@@ -102,6 +105,18 @@ class LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void _exibirDialogo() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: color_button,
+          content: Text("Usuário ou senha incorretos", style: TextStyle(fontSize: 20, color: Colors.white)),
+        );
+      },
     );
   }
 }
