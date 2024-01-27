@@ -88,7 +88,10 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                 Container(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                      onPressed: () => {},
+                      onPressed: () => {
+                            Get.snackbar("Carrinho",
+                                "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}")
+                          },
                       child: Text(
                         "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal.toString()}",
                         style: const TextStyle(
