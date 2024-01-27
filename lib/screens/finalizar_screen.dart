@@ -39,7 +39,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
         backgroundColor: colorBackground,
         appBar: AppBar(
           backgroundColor: colorBackground,
-          title: Text(this.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
@@ -109,7 +109,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },
-                      child: const Text('Sair', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      child: const Text('Sair', style: const TextStyle(fontSize: 20, color: Colors.white))),
                 ),
               ],
             )

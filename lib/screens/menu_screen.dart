@@ -79,12 +79,13 @@ class MenuScreenState extends State<MenuScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(children: [
+                    const Row(children: [
                       const SizedBox(width: 20),
                       const Text(
                         "Menu",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                        style:
+                            const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
                       ),
                     ]),
                     Column(
@@ -98,7 +99,10 @@ class MenuScreenState extends State<MenuScreen> {
                 Container(
                   alignment: Alignment.topRight,
                   child: TextButton(
-                      onPressed: () => {print(valorTotal)},
+                      onPressed: () => {
+                            Get.snackbar("Carrinho",
+                                "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}")
+                          },
                       child: Text(
                         "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}",
                         style: const TextStyle(
@@ -155,7 +159,7 @@ class MenuScreenState extends State<MenuScreen> {
 
 Widget itemMenu(String id, String nome, String descricao, String preco, Function() funcao) {
   return Container(
-    margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+    margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 350,
     height: 110,
     child: Card(
@@ -173,7 +177,7 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
-          IconButton(onPressed: funcao, icon: Icon(Icons.add_shopping_cart, size: 30))
+          IconButton(onPressed: funcao, icon: const Icon(Icons.add_shopping_cart, size: 30))
         ]),
         Row(
           children: [

@@ -76,10 +76,10 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Confirmação",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                      style: const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
                     ),
                     Image.asset('lib/assets/logo.png', height: 80),
                   ],
@@ -165,35 +165,35 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
 Widget itemMenu(String nome, String descricao, String preco, Function() funcao) {
   return Container(
-    margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+    margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 350,
     height: 100,
     child: Card(
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+      margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
       child: Column(children: [
         Row(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
           Text(
             nome,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
           Text(
             "RS $preco",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
           ),
           IconButton(onPressed: () => funcao(), icon: Icon(Icons.delete_sharp, size: 30))
         ]),
         Row(
           children: [
             Container(
-              margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+              margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
               width: 200,
               child: Text(
                 descricao,
                 textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
               ),
             )
           ],

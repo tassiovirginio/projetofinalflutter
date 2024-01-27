@@ -47,8 +47,8 @@ class LoginScreenState extends State<LoginScreen> {
             Text(
               this.title,
               textAlign: TextAlign.center,
-              style:
-                  TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, color: colorFont),
+              style: const TextStyle(
+                  fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, color: colorFont),
             ),
             const SizedBox(height: 40),
             Container(
