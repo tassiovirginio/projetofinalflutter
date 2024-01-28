@@ -24,16 +24,8 @@ class FinalizarScreenState extends State<FinalizarScreen> {
   String numero = LoginScreenState.usuarioLogado[2];
   String endereco = LoginScreenState.usuarioLogado[3];
 
-  double valorTotal = 0;
-
   @override
   Widget build(BuildContext) {
-    valorTotal = 0;
-    MenuScreenState.carrinho.lista.forEach((item) {
-      double valor = double.parse(item.valor);
-      valorTotal += valor;
-    });
-
     return MaterialApp(
       home: Scaffold(
         backgroundColor: colorBackground,
@@ -70,7 +62,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                     cardBig(
                         cliente: ConfirmacaoScreenState.pedido[1],
                         pedido: ConfirmacaoScreenState.pedido[0],
-                        total: valorTotal.toString(),
+                        total: MenuScreenState.carrinho.value.total.toString(),
                         color: const Color.fromARGB(255, 164, 158, 141)),
                   ],
                 ),
@@ -89,7 +81,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
-                        MenuScreenState.carrinho.lista = [];
+                        MenuScreenState.carrinho.value.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => MenuScreen(title: title));
                       },
@@ -105,7 +97,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                           )),
                       onPressed: () {
                         LoginScreenState.usuarioLogado = [];
-                        MenuScreenState.carrinho.lista = [];
+                        MenuScreenState.carrinho.value.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },
