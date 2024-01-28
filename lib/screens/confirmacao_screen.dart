@@ -39,7 +39,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
     List<Widget> listaCarrinhoWidget = [];
 
     valorTotal = 0;
-    MenuScreenState.carrinho.forEach((item) {
+    MenuScreenState.carrinho.lista.forEach((item) {
       double valor = double.parse(item.valor);
       valorTotal += valor;
       listaCarrinhoWidget.add(itemMenu(
@@ -90,7 +90,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   child: TextButton(
                       onPressed: () => {
                             Get.snackbar("Carrinho",
-                                "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}")
+                                "Itens no carrinho: ${MenuScreenState.carrinho.lista.length} \nValor Total: ${valorTotal}")
                           },
                       child: Text(
                         "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal.toString()}",
@@ -135,7 +135,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
                                 List<String> listaItensId = [];
 
-                                MenuScreenState.carrinho.forEach((item) {
+                                MenuScreenState.carrinho.lista.forEach((item) {
                                   listaItensId.add(item.name);
                                 });
 

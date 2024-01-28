@@ -29,7 +29,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
   @override
   Widget build(BuildContext) {
     valorTotal = 0;
-    MenuScreenState.carrinho.forEach((item) {
+    MenuScreenState.carrinho.lista.forEach((item) {
       double valor = double.parse(item.valor);
       valorTotal += valor;
     });
@@ -89,7 +89,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
-                        MenuScreenState.carrinho = [];
+                        MenuScreenState.carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => MenuScreen(title: title));
                       },
@@ -105,7 +105,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                           )),
                       onPressed: () {
                         LoginScreenState.usuarioLogado = [];
-                        MenuScreenState.carrinho = [];
+                        MenuScreenState.carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },

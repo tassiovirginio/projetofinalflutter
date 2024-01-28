@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
@@ -19,7 +20,7 @@ class MenuScreenState extends State<MenuScreen> {
   MenuScreenState(this.title);
   var title;
 
-  static List<Item> carrinho = [];
+  static Carrinho carrinho = Carrinho();
   static List<List<String>>? listaProdutos;
   static int index = 0;
   static double valorTotal = 0;
@@ -30,7 +31,7 @@ class MenuScreenState extends State<MenuScreen> {
     List<Widget> listaProdutosWidget = [];
 
     valorTotal = 0;
-    MenuScreenState.carrinho.forEach((item) {
+    MenuScreenState.carrinho.lista.forEach((item) {
       double valor = double.parse(item.valor);
       valorTotal += valor;
     });
@@ -47,7 +48,7 @@ class MenuScreenState extends State<MenuScreen> {
                         setState(() {
                           int id = int.parse(element[0]);
                           var item = Item(id: id, name: element[1], descricao: element[2], valor: element[3]);
-                          MenuScreenState.carrinho.add(item);
+                          MenuScreenState.carrinho.lista.add(item);
                         })
                       }))
             },
@@ -101,10 +102,10 @@ class MenuScreenState extends State<MenuScreen> {
                   child: TextButton(
                       onPressed: () => {
                             Get.snackbar("Carrinho",
-                                "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}")
+                                "Itens no carrinho: ${MenuScreenState.carrinho.lista.length} \nValor Total: ${valorTotal}")
                           },
                       child: Text(
-                        "Itens no carrinho: ${MenuScreenState.carrinho.length} \nValor Total: ${valorTotal}",
+                        "Itens no carrinho: ${MenuScreenState.carrinho.lista.length} \nValor Total: ${valorTotal}",
                         style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -139,7 +140,7 @@ class MenuScreenState extends State<MenuScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
-                              if (carrinho.isNotEmpty) {
+                              if (carrinho.lista.isNotEmpty) {
                                 Get.to(() => ConfirmacaoScreen(title: title));
                               } else {
                                 Get.snackbar("Erro", "Carrinho vazio...");
