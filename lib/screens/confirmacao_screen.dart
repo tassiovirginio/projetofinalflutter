@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/database/database.dart';
+import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/screens/finalizar_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
@@ -23,6 +25,8 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
   @override
   Widget build(BuildContext) {
+    Carrinho carrinho = Get.find();
+
     List<List<String>>? listaProdutos = MenuScreenState.listaProdutos;
 
     Map<String, List<String>> mapaProdutos = {};
@@ -37,15 +41,14 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
     List<Widget> listaCarrinhoWidget = [];
 
-    MenuScreenState.carrinho.value.lista.forEach((item) {
+    carrinho.lista.forEach((item) {
       listaCarrinhoWidget.add(itemMenu(
           item.name,
           item.descricao,
           item.valor,
           () => {
                 setState(() {
-                  MenuScreenState.carrinho.value.remove(item);
-                  MenuScreenState.carrinho.refresh();
+                  carrinho.remove(item);
                 })
               }));
     });
@@ -86,11 +89,11 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   alignment: Alignment.topRight,
                   child: TextButton(
                       onPressed: () => {
-                            Get.snackbar("Carrinho",
-                                "Itens no carrinho: ${MenuScreenState.carrinho.value.length} \nValor Total: ${MenuScreenState.carrinho.value.total}")
+                            Get.snackbar(
+                                "Carrinho", "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}")
                           },
                       child: Text(
-                        "Itens no carrinho: ${MenuScreenState.carrinho.value.length} \nValor Total: ${MenuScreenState.carrinho.value.total}",
+                        "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}",
                         style: const TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -127,12 +130,12 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                   borderRadius: BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () async {
-                              if (MenuScreenState.carrinho.value.length > 0) {
+                              if (carrinho.length > 0) {
                                 Get.to(() => ConfirmacaoScreen(title: title));
 
                                 List<String> listaItensId = [];
 
-                                MenuScreenState.carrinho.value.lista.forEach((item) {
+                                carrinho.lista.forEach((item) {
                                   listaItensId.add(item.name);
                                 });
 
@@ -142,7 +145,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                   LoginScreenState.usuarioLogado[2],
                                   LoginScreenState.usuarioLogado[3],
                                   listaItensId.toString(),
-                                  MenuScreenState.carrinho.value.total.toString()
+                                  carrinho.total.toString()
                                 ];
                                 List<String> lsitaPedidos = await DataBase.realizarPedido(
                                     pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);

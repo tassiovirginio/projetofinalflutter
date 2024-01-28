@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
+import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/screens/login_screen.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
@@ -19,6 +21,7 @@ class FinalizarScreen extends StatefulWidget {
 class FinalizarScreenState extends State<FinalizarScreen> {
   var title;
   FinalizarScreenState(this.title);
+  Carrinho carrinho = Get.find();
 
   String nome = LoginScreenState.usuarioLogado[1];
   String numero = LoginScreenState.usuarioLogado[2];
@@ -62,7 +65,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                     cardBig(
                         cliente: ConfirmacaoScreenState.pedido[1],
                         pedido: ConfirmacaoScreenState.pedido[0],
-                        total: MenuScreenState.carrinho.value.total.toString(),
+                        total: carrinho.total.toString(),
                         color: const Color.fromARGB(255, 164, 158, 141)),
                   ],
                 ),
@@ -81,7 +84,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
-                        MenuScreenState.carrinho.value.lista = [];
+                        carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => MenuScreen(title: title));
                       },
@@ -97,7 +100,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                           )),
                       onPressed: () {
                         LoginScreenState.usuarioLogado = [];
-                        MenuScreenState.carrinho.value.lista = [];
+                        carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },
