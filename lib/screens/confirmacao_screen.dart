@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/screens/finalizar_screen.dart';

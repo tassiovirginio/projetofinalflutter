@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
-// import 'package:get/get.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.title});
