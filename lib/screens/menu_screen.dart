@@ -35,7 +35,7 @@ class MenuScreenState extends State<MenuScreen> {
 
     carrinho = Get.find();
 
-    listaProdutos = DataBase.listaProdutos;
+    listaProdutos = DataBase.getProdutos();
     List<Widget> listaProdutosWidget = [];
 
     listaProdutos?.forEach((element) => {

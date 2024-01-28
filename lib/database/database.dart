@@ -20,36 +20,29 @@ const _credentials = r'''
 const _spreadsheetId = '1YBngv6BzG_xqwA_H8HaXQeRab1oYnx_sp_gYsx2U1O8';
 
 class DataBase {
-  static var gsheets;
-  static var ss;
-  static var sheetProdutos;
-  static var sheetPedidos;
-  static var sheetUsuarios;
-  static List<List<String>>? listaProdutos;
-  static List<List<String>>? listaPedidos;
-  static List<List<String>>? listaUsuarios;
+  static var _sheetPedidos;
+  static List<List<String>>? _listaProdutos;
+  static List<List<String>>? _listaPedidos;
+  static List<List<String>>? _listaUsuarios;
 
   static carregarSheet() async {
-    gsheets = GSheets(_credentials);
-    ss = await gsheets.spreadsheet(_spreadsheetId);
+    var gsheets = GSheets(_credentials);
+    var ss = await gsheets.spreadsheet(_spreadsheetId);
 
-    listaProdutos = await criarTabelaMenu(DataBase.ss);
+    _listaProdutos = await criarTabelaMenu(ss);
+    carregarLista(_listaProdutos);
 
-    carregarLista(listaProdutos);
+    _listaPedidos = await criarTabelaPedidos(ss);
+    carregarLista(_listaPedidos);
 
-    listaPedidos = await criarTabelaPedidos(DataBase.ss);
-
-    carregarLista(listaPedidos);
-
-    listaUsuarios = await criarTabelaUsuarios(DataBase.ss);
-
-    carregarLista(listaUsuarios);
+    _listaUsuarios = await criarTabelaUsuarios(ss);
+    carregarLista(_listaUsuarios);
 
     // realizarPedido("11", "Tassio", "6399999999", "Rua XX, XXX - Nova Cidade", "Pizza;X-burger", "40");
   }
 
   static Future<List<List<String>>> criarTabelaMenu(Spreadsheet ss) async {
-    sheetProdutos = await ss.worksheetByTitle('menu');
+    var sheetProdutos = await ss.worksheetByTitle('menu');
 
     if (sheetProdutos == null) {
       sheetProdutos = await ss.addWorksheet('menu');
@@ -81,45 +74,45 @@ class DataBase {
   }
 
   static Future<List<List<String>>> criarTabelaPedidos(Spreadsheet ss) async {
-    sheetPedidos = await ss.worksheetByTitle('pedidos');
+    _sheetPedidos = await ss.worksheetByTitle('pedidos');
 
-    if (sheetPedidos == null) {
-      sheetPedidos = await ss.addWorksheet('pedidos');
+    if (_sheetPedidos == null) {
+      _sheetPedidos = await ss.addWorksheet('pedidos');
       // insert list in row #1
       final primeiraLinha = ['id', 'nome', 'numero', 'endereco', 'lista', 'total'];
-      await sheetPedidos.values.insertRow(1, primeiraLinha);
+      await _sheetPedidos.values.insertRow(1, primeiraLinha);
       // print(await sheetPedidos.values.row(1));
 
       final primeiraColuna = ['0', '1', '2'];
-      await sheetPedidos.values.insertColumn(1, primeiraColuna, fromRow: 2);
+      await _sheetPedidos.values.insertColumn(1, primeiraColuna, fromRow: 2);
       // print(await sheetPedidos.values.column(1, fromRow: 2));
 
       final segundaColuna = ['Tassio', 'Lily', 'Pedro'];
-      await sheetPedidos.values.insertColumnByKey('nome', segundaColuna);
+      await _sheetPedidos.values.insertColumnByKey('nome', segundaColuna);
       // print(await sheetPedidos.values.columnByKey('nome'));
 
       final terceiraColuna = ['6399999999', '7199999999', '7199999999'];
-      await sheetPedidos.values.insertColumnByKey('numero', terceiraColuna);
+      await _sheetPedidos.values.insertColumnByKey('numero', terceiraColuna);
       // print(await sheetPedidos.values.columnByKey('numero'));
 
       final enderecoColuna = ['Rua XX, XXX - Nova Cidade', 'Rua XX, XXX - Imbuí', 'Rua XX, XXX - Ondina'];
-      await sheetPedidos.values.insertColumnByKey('endereco', enderecoColuna);
+      await _sheetPedidos.values.insertColumnByKey('endereco', enderecoColuna);
       // print(await sheetPedidos.values.columnByKey('endereco'));
 
       final listaColuna = ['Pizza;X-burger', 'Pizza; Refri', 'Pizza;Suco'];
-      await sheetPedidos.values.insertColumnByKey('lista', listaColuna);
+      await _sheetPedidos.values.insertColumnByKey('lista', listaColuna);
       // print(await sheetPedidos.values.columnByKey('lista'));
 
       final totalColuna = ['40', '50', '50.1'];
-      await sheetPedidos.values.insertColumnByKey('total', totalColuna);
+      await _sheetPedidos.values.insertColumnByKey('total', totalColuna);
       // print(await sheetPedidos.values.columnByKey('total'));
     }
 
-    return await sheetPedidos.values.allRows();
+    return await _sheetPedidos.values.allRows();
   }
 
   static Future<List<List<String>>> criarTabelaUsuarios(Spreadsheet ss) async {
-    sheetUsuarios = await ss.worksheetByTitle('usuarios');
+    var sheetUsuarios = await ss.worksheetByTitle('usuarios');
 
     if (sheetUsuarios == null) {
       sheetUsuarios = await ss.addWorksheet('usuarios');
@@ -157,7 +150,7 @@ class DataBase {
   static List<String> fazerLogin(String login, String senha) {
     List<String> retorno = [];
 
-    listaUsuarios?.forEach((element) {
+    _listaUsuarios?.forEach((element) {
       if (element[4] == login && element[5] == senha) {
         retorno = element;
       }
@@ -169,25 +162,25 @@ class DataBase {
   static void carregarLista(List<List<String>>? lista) => lista?.forEach(print);
 
   static List<List<String>>? getPedidos() {
-    while (listaPedidos == null) {
+    while (_listaPedidos == null) {
       sleep(Duration(seconds: 1));
     }
-    return listaPedidos;
+    return _listaPedidos;
   }
 
   static List<List<String>>? getProdutos() {
-    while (listaProdutos == null) {
+    while (_listaProdutos == null) {
       sleep(Duration(seconds: 1));
     }
-    return listaProdutos;
+    return _listaProdutos;
   }
 
   static Future<List<String>> realizarPedido(
       String id, String nome, String numero, String endereco, String lista, String total) async {
     List<String> retorno = [];
-    Map ultimaLinha = await sheetPedidos.values.map.lastRow();
+    Map ultimaLinha = await _sheetPedidos.values.map.lastRow();
     int novo_id = int.parse(ultimaLinha["id"]) + 1;
-    await sheetPedidos.values.insertRow(novo_id, [novo_id, nome, numero, endereco, lista, total]);
+    await _sheetPedidos.values.insertRow(novo_id, [novo_id, nome, numero, endereco, lista, total]);
     retorno = [novo_id.toString(), nome, numero, endereco, lista, total];
     return retorno;
   }
