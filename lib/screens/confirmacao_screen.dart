@@ -64,101 +64,103 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
           centerTitle: true,
         ),
         body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Confirmação",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
-                    ),
-                    Image.asset('lib/assets/logo.png', height: 80),
-                  ],
-                ),
-                const SizedBox(height: 30),
-                Container(
-                  alignment: Alignment.topRight,
-                  child: TextButton(
-                      onPressed: () => {
-                            Get.snackbar(
-                                "Carrinho", "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}")
-                          },
-                      child: Text(
-                        "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}",
-                        style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontFamily: 'Times New Roman',
-                            fontWeight: FontWeight.bold),
-                      )),
-                ),
-                const SizedBox(height: 20),
-                colunacarrinho,
-                const SizedBox(height: 30),
-                Container(
-                    width: 400,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    alignment: Alignment.bottomCenter,
-                    transformAlignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: colorButton,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                                )),
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
-                        const SizedBox(width: 20),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                primary: colorButton,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
-                                )),
-                            onPressed: () async {
-                              if (carrinho.length > 0) {
-                                Get.to(() => ConfirmacaoScreen(title: title));
-
-                                List<String> listaItensId = [];
-
-                                carrinho.lista.forEach((item) {
-                                  listaItensId.add(item.name);
-                                });
-
-                                pedido = [
-                                  "",
-                                  LoginScreenState.usuarioLogado[1],
-                                  LoginScreenState.usuarioLogado[2],
-                                  LoginScreenState.usuarioLogado[3],
-                                  listaItensId.toString(),
-                                  carrinho.total.toString()
-                                ];
-                                List<String> lsitaPedidos = await DataBase.realizarPedido(
-                                    pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
-
-                                pedido = lsitaPedidos;
-                                Get.to(() => FinalizarScreen(title: title));
-                              } else {
-                                Get.snackbar("Erro", "Carrinho vazio...");
-                              }
-                            },
-                            child: const Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
-                      ],
+          height: double.infinity,
+          width: double.infinity,
+          child: SingleChildScrollView(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Confirmação",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                  ),
+                  Image.asset('lib/assets/logo.png', height: 80),
+                ],
+              ),
+              const SizedBox(height: 30),
+              Container(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                    onPressed: () => {
+                          Get.snackbar(
+                              "Carrinho", "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}")
+                        },
+                    child: Text(
+                      "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}",
+                      style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          fontFamily: 'Times New Roman',
+                          fontWeight: FontWeight.bold),
                     )),
-              ],
-            )),
+              ),
+              const SizedBox(height: 20),
+              colunacarrinho,
+              const SizedBox(height: 30),
+              Container(
+                  width: 400,
+                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  alignment: Alignment.bottomCenter,
+                  transformAlignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: colorButton,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                              )),
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      const SizedBox(width: 20),
+                      ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: colorButton,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                              )),
+                          onPressed: () async {
+                            if (carrinho.length > 0) {
+                              Get.to(() => ConfirmacaoScreen(title: title));
+
+                              List<String> listaItensId = [];
+
+                              carrinho.lista.forEach((item) {
+                                listaItensId.add(item.name);
+                              });
+
+                              pedido = [
+                                "",
+                                LoginScreenState.usuarioLogado[1],
+                                LoginScreenState.usuarioLogado[2],
+                                LoginScreenState.usuarioLogado[3],
+                                listaItensId.toString(),
+                                carrinho.total.toString()
+                              ];
+                              List<String> lsitaPedidos = await DataBase.realizarPedido(
+                                  pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
+
+                              pedido = lsitaPedidos;
+                              Get.to(() => FinalizarScreen(title: title));
+                            } else {
+                              Get.snackbar("Erro", "Carrinho vazio...");
+                            }
+                          },
+                          child: const Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                    ],
+                  )),
+            ],
+          )),
+        ),
       ),
     );
   }
