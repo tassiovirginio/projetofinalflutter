@@ -77,7 +77,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: colorButton,
+                          backgroundColor: colorButton,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),
@@ -92,7 +92,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: colorButton,
+                          backgroundColor: colorButton,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(9.0)),
                           )),

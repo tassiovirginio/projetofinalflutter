@@ -113,7 +113,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: colorButton,
+                              backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),
@@ -124,7 +124,7 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                       const SizedBox(width: 20),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: colorButton,
+                              backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),

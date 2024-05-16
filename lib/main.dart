@@ -14,14 +14,12 @@ var title = 'Restaurante Sabores do Mundo';
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: colorBackground),
-        useMaterial3: true,
-      ),
-      home: LoginScreen(title: title),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+        title: title,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: colorBackground),
+          useMaterial3: true,
+        ),
+        home: LoginScreen(title: title),
+      );
 }

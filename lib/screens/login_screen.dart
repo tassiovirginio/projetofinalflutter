@@ -83,7 +83,7 @@ class LoginScreenState extends State<LoginScreen> {
                       margin: const EdgeInsets.fromLTRB(100, 40, 100, 0),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: colorButton,
+                              backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(9.0)),
                               )),

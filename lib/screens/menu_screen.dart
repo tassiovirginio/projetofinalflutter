@@ -35,25 +35,29 @@ class MenuScreenState extends State<MenuScreen> {
     listaProdutos = DataBase.getProdutos();
     List<Widget> listaProdutosWidget = [];
 
-    listaProdutos?.forEach((element) => {
-          if (element[0] != "id")
-            {
-              listaProdutosWidget.add(itemMenu(
-                  element[0],
-                  element[1],
-                  element[2],
-                  element[3],
-                  () => {
-                        setState(() {
-                          int id = int.parse(element[0]);
-                          var item = Item(id: id, name: element[1], descricao: element[2], valor: element[3]);
-                          carrinho.lista.add(item);
-                          // carrinho.value.lista.add(item);
-                          // carrinho.refresh();
-                        })
-                      }))
-            },
-        });
+    listaProdutos?.forEach((element) {
+      if (element[0] != "id") {
+        listaProdutosWidget.add(itemMenu(
+            element[0],
+            element[1],
+            element[2],
+            element[3],
+            () => {
+                  setState(() {
+                    int id = int.parse(element[0]);
+                    var item = Item(
+                        id: id,
+                        name: element[1],
+                        descricao: element[2],
+                        valor: element[3]);
+                    carrinho.lista.add(item);
+                    // carrinho.value.lista.add(item);
+                    // carrinho.refresh();
+                  })
+                }));
+      }
+      ;
+    });
 
     Column columnProdutos = Column(
       children: listaProdutosWidget,
@@ -64,9 +68,12 @@ class MenuScreenState extends State<MenuScreen> {
         backgroundColor: colorBackground,
         appBar: AppBar(
           backgroundColor: colorBackground,
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 90,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Container(
@@ -86,8 +93,10 @@ class MenuScreenState extends State<MenuScreen> {
                       const Text(
                         "Menu",
                         textAlign: TextAlign.center,
-                        style:
-                            const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                        style: const TextStyle(
+                            fontSize: 38,
+                            fontFamily: 'Times New Roman',
+                            fontStyle: FontStyle.italic),
                       ),
                     ]),
                     Column(
@@ -102,8 +111,8 @@ class MenuScreenState extends State<MenuScreen> {
                   alignment: Alignment.topRight,
                   child: TextButton(
                       onPressed: () => {
-                            Get.snackbar(
-                                "Carrinho", "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}"),
+                            Get.snackbar("Carrinho",
+                                "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}"),
                           },
                       child: Text(
                         "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}",
@@ -125,20 +134,24 @@ class MenuScreenState extends State<MenuScreen> {
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: colorButton,
+                                backgroundColor: colorButton,
                                 shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
                               Get.back();
                             },
-                            child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                            child: const Text('Voltar',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white))),
                         const SizedBox(width: 20),
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                primary: colorButton,
+                                backgroundColor: colorButton,
                                 shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(9.0)),
                                 )),
                             onPressed: () {
                               if (carrinho.lista.isNotEmpty) {
@@ -147,7 +160,9 @@ class MenuScreenState extends State<MenuScreen> {
                                 Get.snackbar("Erro", "Carrinho vazio...");
                               }
                             },
-                            child: const Text('Carrinho', style: TextStyle(fontSize: 20, color: Colors.white))),
+                            child: const Text('Carrinho',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white))),
                       ],
                     )),
               ],
@@ -159,7 +174,8 @@ class MenuScreenState extends State<MenuScreen> {
   }
 }
 
-Widget itemMenu(String id, String nome, String descricao, String preco, Function() funcao) {
+Widget itemMenu(
+    String id, String nome, String descricao, String preco, Function() funcao) {
   return Container(
     margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 350,
@@ -168,19 +184,30 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
       margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
       child: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Text(
-            nome,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "RS $preco",
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-          ),
-          IconButton(onPressed: funcao, icon: const Icon(Icons.add_shopping_cart, size: 30))
-        ]),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                nome,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "RS $preco",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: funcao,
+                  icon: const Icon(Icons.add_shopping_cart, size: 30))
+            ]),
         Row(
           children: [
             Container(
@@ -189,7 +216,10 @@ Widget itemMenu(String id, String nome, String descricao, String preco, Function
               child: Text(
                 descricao,
                 textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],

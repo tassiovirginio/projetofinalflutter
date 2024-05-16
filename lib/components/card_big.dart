@@ -4,7 +4,7 @@ Widget cardBig({required String cliente, required String pedido, required String
   return Card(
       color: color,
       child: Container(
-        margin: EdgeInsets.all(10.0),
+        margin: const EdgeInsets.all(10.0),
         height: 140,
         width: 250,
         child: Column(
@@ -13,15 +13,15 @@ Widget cardBig({required String cliente, required String pedido, required String
             children: <Widget>[
               Text(
                 "Cliente:          $cliente",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               Text(
                 "Pedido nº:     $pedido",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
               Text(
                 "Total:         R\$ $total",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ]),
       ));

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 Widget createTextFormField(final String texto, bool obscureText) {
   return Container(
-    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+    margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
     child: TextFormField(
       obscureText: obscureText,
       decoration: InputDecoration(
-        border: UnderlineInputBorder(),
+        border: const UnderlineInputBorder(),
         labelText: texto,
       ),
     ),
