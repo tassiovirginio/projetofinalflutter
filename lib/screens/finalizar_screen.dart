@@ -32,9 +32,12 @@ class FinalizarScreenState extends State<FinalizarScreen> {
         backgroundColor: colorBackground,
         appBar: AppBar(
           backgroundColor: colorBackground,
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Column(
@@ -54,7 +57,10 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                 const Text(
                   "Pedido Feito com Sucesso",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 28, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontFamily: 'Times New Roman',
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 50),
                 Row(
@@ -79,14 +85,16 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: colorButton,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
                         carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => MenuScreen(title: title));
                       },
-                      child: const Text('Novo Pedido', style: TextStyle(fontSize: 20, color: Colors.white))),
+                      child: const Text('Novo Pedido',
+                          style: TextStyle(fontSize: 20, color: Colors.white))),
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -94,7 +102,8 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: colorButton,
                           shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
                         LoginScreenState.usuarioLogado = [];
@@ -102,7 +111,9 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));
                       },
-                      child: const Text('Sair', style: const TextStyle(fontSize: 20, color: Colors.white))),
+                      child: const Text('Sair',
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white))),
                 ),
               ],
             )

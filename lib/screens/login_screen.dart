@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 
 class LoginScreenState extends State<LoginScreen> {
   var title;
-  LoginScreenState(this.title);
+  LoginScreenState(title);
 
   static List<String> usuarioLogado = [];
 
@@ -32,9 +32,12 @@ class LoginScreenState extends State<LoginScreen> {
         backgroundColor: colorBackground,
         appBar: AppBar(
           backgroundColor: colorBackground,
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 90,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Column(
@@ -42,13 +45,16 @@ class LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             const SizedBox(height: 30),
-            Image.asset('lib/assets/logo.png', height: 150),
+            Image.asset('lib/assets/logo.png', height: 170),
             const SizedBox(height: 40),
             Text(
-              this.title,
+              title,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                  fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic, color: colorFont),
+                  fontSize: 38,
+                  fontFamily: 'Times New Roman',
+                  fontStyle: FontStyle.italic,
+                  color: colorFont),
             ),
             const SizedBox(height: 40),
             Container(
@@ -63,7 +69,8 @@ class LoginScreenState extends State<LoginScreen> {
                       child: TextField(
                         controller: usuarioController,
                         keyboardType: TextInputType.name,
-                        style: const TextStyle(fontSize: 20, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                         decoration: getAuthenticationImputDecoration('Usuário'),
                       ),
                     ),
@@ -75,7 +82,8 @@ class LoginScreenState extends State<LoginScreen> {
                         obscureText: true,
                         enableSuggestions: false,
                         autocorrect: false,
-                        style: const TextStyle(fontSize: 20, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                         decoration: getAuthenticationImputDecoration('Senha'),
                       ),
                     ),
@@ -85,21 +93,27 @@ class LoginScreenState extends State<LoginScreen> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
                             String usuario = usuarioController.text;
                             String senha = senhaController.text;
-                            String senhaMD5 = md5.convert(utf8.encode(senha)).toString();
-                            List<String> logado = DataBase.fazerLogin(usuario, senhaMD5);
+                            String senhaMD5 =
+                                md5.convert(utf8.encode(senha)).toString();
+                            List<String> logado =
+                                DataBase.fazerLogin(usuario, senhaMD5);
                             if (logado.isNotEmpty) {
                               usuarioLogado = logado;
                               Get.to(() => MenuScreen(title: title));
                             } else {
-                              Get.snackbar("Erro", "Usuário ou senha inválidos");
+                              Get.snackbar(
+                                  "Erro", "Usuário ou senha inválidos");
                             }
                           },
-                          child: const Text('Entrar', style: TextStyle(fontSize: 20, color: colorButtonText))),
+                          child: const Text('Entrar',
+                              style: TextStyle(
+                                  fontSize: 20, color: colorButtonText))),
                     ),
                   ]),
             ),

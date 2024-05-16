@@ -58,9 +58,12 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
         backgroundColor: colorBackground,
         appBar: AppBar(
           backgroundColor: colorBackground,
-          title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+          title: Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
           elevation: 70,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
           centerTitle: true,
         ),
         body: Container(
@@ -78,7 +81,10 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                   const Text(
                     "Confirmação",
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 38, fontFamily: 'Times New Roman', fontStyle: FontStyle.italic),
+                    style: const TextStyle(
+                        fontSize: 38,
+                        fontFamily: 'Times New Roman',
+                        fontStyle: FontStyle.italic),
                   ),
                   Image.asset('lib/assets/logo.png', height: 80),
                 ],
@@ -88,8 +94,8 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                 alignment: Alignment.topRight,
                 child: TextButton(
                     onPressed: () => {
-                          Get.snackbar(
-                              "Carrinho", "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}")
+                          Get.snackbar("Carrinho",
+                              "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}")
                         },
                     child: Text(
                       "Itens no carrinho: ${carrinho.length} \nValor Total: ${carrinho.total}",
@@ -115,18 +121,22 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
                             Get.back();
                           },
-                          child: const Text('Voltar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                          child: const Text('Voltar',
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.white))),
                       const SizedBox(width: 20),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: colorButton,
                               shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(9.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () async {
                             if (carrinho.length > 0) {
@@ -146,8 +156,14 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                                 listaItensId.toString(),
                                 carrinho.total.toString()
                               ];
-                              List<String> lsitaPedidos = await DataBase.realizarPedido(
-                                  pedido[0], pedido[1], pedido[2], pedido[3], pedido[4], pedido[5]);
+                              List<String> lsitaPedidos =
+                                  await DataBase.realizarPedido(
+                                      pedido[0],
+                                      pedido[1],
+                                      pedido[2],
+                                      pedido[3],
+                                      pedido[4],
+                                      pedido[5]);
 
                               pedido = lsitaPedidos;
                               Get.to(() => FinalizarScreen(title: title));
@@ -155,7 +171,9 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
                               Get.snackbar("Erro", "Carrinho vazio...");
                             }
                           },
-                          child: const Text('Confirmar', style: TextStyle(fontSize: 20, color: Colors.white))),
+                          child: const Text('Confirmar',
+                              style: TextStyle(
+                                  fontSize: 20, color: Colors.white))),
                     ],
                   )),
             ],
@@ -166,7 +184,8 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
   }
 }
 
-Widget itemMenu(String nome, String descricao, String preco, Function() funcao) {
+Widget itemMenu(
+    String nome, String descricao, String preco, Function() funcao) {
   return Container(
     margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
     width: 350,
@@ -175,19 +194,30 @@ Widget itemMenu(String nome, String descricao, String preco, Function() funcao) 
       margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
       color: Colors.white,
       child: Column(children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, crossAxisAlignment: CrossAxisAlignment.center, children: [
-          Text(
-            nome,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "RS $preco",
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
-          ),
-          IconButton(onPressed: () => funcao(), icon: Icon(Icons.delete_sharp, size: 30))
-        ]),
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                nome,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "RS $preco",
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () => funcao(),
+                  icon: Icon(Icons.delete_sharp, size: 30))
+            ]),
         Row(
           children: [
             Container(
@@ -196,7 +226,10 @@ Widget itemMenu(String nome, String descricao, String preco, Function() funcao) 
               child: Text(
                 descricao,
                 textAlign: TextAlign.start,
-                style: const TextStyle(fontSize: 12, fontFamily: 'Times New Roman', fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Times New Roman',
+                    fontWeight: FontWeight.bold),
               ),
             )
           ],
