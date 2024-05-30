@@ -83,12 +83,10 @@ class LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
-                            String? usuario = loginTextField.controller?.text;
-                            String? senha = senhaTextField.controller?.text;
                             String senhaMD5 =
-                                md5.convert(utf8.encode(senha!)).toString();
+                                md5.convert(utf8.encode(senhaTextField.controller!.text)).toString();
                             List<String> logado =
-                                DataBase.fazerLogin(usuario!, senhaMD5);
+                                DataBase.fazerLogin(loginTextField.controller!.text, senhaMD5);
                             if (logado.isNotEmpty) {
                               usuarioLogado = logado;
                               Get.to(() => MenuScreen(title: title));
