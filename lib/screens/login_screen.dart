@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
 import 'package:projetofinalflutter/atomic/atomos/login_text_field.dart';
+import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
 import 'package:projetofinalflutter/atomic/atomos/senha_text_field.dart';
-import 'package:projetofinalflutter/atomic/moleculas/login.dart';
+import 'package:projetofinalflutter/atomic/moleculas/login_box.dart';
 import 'dart:convert';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
 import 'package:projetofinalflutter/database/database.dart';
@@ -29,16 +30,7 @@ class LoginScreenState extends State<LoginScreen> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: colorBackground,
-        appBar: AppBar(
-          backgroundColor: colorBackground,
-          title: Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-          elevation: 90,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-          centerTitle: true,
-        ),
+        appBar: MeuAppBar(title),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,

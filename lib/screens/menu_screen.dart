@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/models/item.dart';
 import 'package:projetofinalflutter/database/database.dart';
@@ -66,16 +67,7 @@ class MenuScreenState extends State<MenuScreen> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: colorBackground,
-        appBar: AppBar(
-          backgroundColor: colorBackground,
-          title: Text(title,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
-          elevation: 90,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(12))),
-          centerTitle: true,
-        ),
+        appBar: MeuAppBar(title),
         body: Container(
           height: double.infinity,
           width: double.infinity,
