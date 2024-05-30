@@ -5,10 +5,8 @@ import 'package:projetofinalflutter/atomic/atomos/botao_login.dart';
 import 'package:projetofinalflutter/atomic/atomos/login_text_field.dart';
 import 'package:projetofinalflutter/atomic/atomos/senha_text_field.dart';
 import 'dart:convert';
-import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
-import 'package:projetofinalflutter/utils/utils.dart';
 
 class LoginBox extends Container {
   var loginTextField = LoginTextField();

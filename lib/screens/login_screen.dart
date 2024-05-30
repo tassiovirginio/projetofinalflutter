@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:crypto/crypto.dart';
-import 'package:get/get.dart';
 import 'package:projetofinalflutter/atomic/atomos/login_text_field.dart';
 import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
 import 'package:projetofinalflutter/atomic/atomos/senha_text_field.dart';
 import 'package:projetofinalflutter/atomic/moleculas/login_box.dart';
-import 'dart:convert';
-import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
-import 'package:projetofinalflutter/database/database.dart';
-import 'package:projetofinalflutter/screens/menu_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
-
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required this.title});

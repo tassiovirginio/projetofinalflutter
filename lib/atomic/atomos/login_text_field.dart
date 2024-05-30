@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:crypto/crypto.dart';
-import 'package:get/get.dart';
-import 'dart:convert';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
-import 'package:projetofinalflutter/database/database.dart';
-import 'package:projetofinalflutter/screens/menu_screen.dart';
-import 'package:projetofinalflutter/utils/utils.dart';
-
 
 class LoginTextField extends TextField {
   LoginTextField({super.key})
