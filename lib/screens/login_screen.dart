@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
+import 'package:projetofinalflutter/atomic/atomos/login_text_field.dart';
+import 'package:projetofinalflutter/atomic/atomos/senha_text_field.dart';
+import 'dart:convert';
 import 'package:projetofinalflutter/components/authentication_imput_decoration.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/screens/menu_screen.dart';
 import 'package:projetofinalflutter/utils/utils.dart';
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required this.title});
-
   final String title;
-
   @override
   State<LoginScreen> createState() => LoginScreenState(title);
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  var title;
-  LoginScreenState(title);
+  String title = "";
+  LoginScreenState(this.title);
 
   static List<String> usuarioLogado = [];
 
-  TextEditingController usuarioController = TextEditingController();
-  TextEditingController senhaController = TextEditingController();
+  var loginTextField = LoginTextField();
+  var senhaTextField = SenhaTextField();
 
   @override
   Widget build(BuildContext) {
@@ -66,26 +67,11 @@ class LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: TextField(
-                        controller: usuarioController,
-                        keyboardType: TextInputType.name,
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.black),
-                        decoration: getAuthenticationImputDecoration('Usuário'),
-                      ),
+                      child: loginTextField,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                      child: TextField(
-                        controller: senhaController,
-                        keyboardType: TextInputType.name,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        style:
-                            const TextStyle(fontSize: 20, color: Colors.black),
-                        decoration: getAuthenticationImputDecoration('Senha'),
-                      ),
+                      child: senhaTextField,
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(100, 40, 100, 0),
@@ -97,12 +83,12 @@ class LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(9.0)),
                               )),
                           onPressed: () {
-                            String usuario = usuarioController.text;
-                            String senha = senhaController.text;
+                            String? usuario = loginTextField.controller?.text;
+                            String? senha = senhaTextField.controller?.text;
                             String senhaMD5 =
-                                md5.convert(utf8.encode(senha)).toString();
+                                md5.convert(utf8.encode(senha!)).toString();
                             List<String> logado =
-                                DataBase.fazerLogin(usuario, senhaMD5);
+                                DataBase.fazerLogin(usuario!, senhaMD5);
                             if (logado.isNotEmpty) {
                               usuarioLogado = logado;
                               Get.to(() => MenuScreen(title: title));
