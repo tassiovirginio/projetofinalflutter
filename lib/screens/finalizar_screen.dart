@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
+import 'package:projetofinalflutter/atomic/moleculas/login_box.dart';
 import 'package:projetofinalflutter/components/card_big.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/screens/confirmacao_screen.dart';
@@ -22,9 +23,9 @@ class FinalizarScreenState extends State<FinalizarScreen> {
   FinalizarScreenState(this.title);
   Carrinho carrinho = Get.find();
 
-  String nome = LoginScreenState.usuarioLogado[1];
-  String numero = LoginScreenState.usuarioLogado[2];
-  String endereco = LoginScreenState.usuarioLogado[3];
+  String nome = LoginBox.usuarioLogado[1];
+  String numero = LoginBox.usuarioLogado[2];
+  String endereco = LoginBox.usuarioLogado[3];
 
   @override
   Widget build(BuildContext) {
@@ -98,7 +99,7 @@ class FinalizarScreenState extends State<FinalizarScreen> {
                                 BorderRadius.all(Radius.circular(9.0)),
                           )),
                       onPressed: () {
-                        LoginScreenState.usuarioLogado = [];
+                        LoginBox.usuarioLogado = [];
                         carrinho.lista = [];
                         ConfirmacaoScreenState.pedido = [];
                         Get.to(() => LoginScreen(title: title));

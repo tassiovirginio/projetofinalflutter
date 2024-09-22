@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
+import 'package:projetofinalflutter/atomic/moleculas/login_box.dart';
 import 'package:projetofinalflutter/database/database.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/screens/finalizar_screen.dart';
@@ -142,9 +143,9 @@ class ConfirmacaoScreenState extends State<ConfirmacaoScreen> {
 
                               pedido = [
                                 "",
-                                LoginScreenState.usuarioLogado[1],
-                                LoginScreenState.usuarioLogado[2],
-                                LoginScreenState.usuarioLogado[3],
+                                LoginBox.usuarioLogado[1],
+                                LoginBox.usuarioLogado[2],
+                                LoginBox.usuarioLogado[3],
                                 listaItensId.toString(),
                                 carrinho.total.toString()
                               ];

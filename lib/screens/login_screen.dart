@@ -16,7 +16,7 @@ class LoginScreenState extends State<LoginScreen> {
   String title = "";
   LoginScreenState(this.title);
 
-  static List<String> usuarioLogado = [];
+  // static List<String> usuarioLogado = [];
 
   @override
   Widget build(BuildContext) {
