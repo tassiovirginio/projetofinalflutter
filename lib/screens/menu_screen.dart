@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:projetofinalflutter/atomic/atomos/botao_voltar.dart';
+import 'package:projetofinalflutter/atomic/atomos/butao_carrinho.dart';
 import 'package:projetofinalflutter/atomic/atomos/meu_app_bar.dart';
 import 'package:projetofinalflutter/models/carrinho.dart';
 import 'package:projetofinalflutter/models/item.dart';
@@ -57,7 +59,6 @@ class MenuScreenState extends State<MenuScreen> {
                   })
                 }));
       }
-      ;
     });
 
     Column columnProdutos = Column(
@@ -68,7 +69,7 @@ class MenuScreenState extends State<MenuScreen> {
       home: Scaffold(
         backgroundColor: colorBackground,
         appBar: MeuAppBar(title),
-        body: Container(
+        body: SizedBox(
           height: double.infinity,
           width: double.infinity,
           child: SingleChildScrollView(
@@ -81,11 +82,11 @@ class MenuScreenState extends State<MenuScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const Row(children: [
-                      const SizedBox(width: 20),
-                      const Text(
+                      SizedBox(width: 20),
+                      Text(
                         "Menu",
                         textAlign: TextAlign.center,
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 38,
                             fontFamily: 'Times New Roman',
                             fontStyle: FontStyle.italic),
@@ -124,39 +125,18 @@ class MenuScreenState extends State<MenuScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: colorButton,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(9.0)),
-                                )),
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text('Voltar',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white))),
+                        BotaoVoltar(),
                         const SizedBox(width: 20),
-                        ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: colorButton,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(9.0)),
-                                )),
-                            onPressed: () {
-                              if (carrinho.lista.isNotEmpty) {
-                                Get.to(() => ConfirmacaoScreen(title: title));
-                              } else {
-                                Get.snackbar("Erro", "Carrinho vazio...");
-                              }
-                            },
-                            child: const Text('Carrinho',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white))),
+                        BotaoCarrinho(onPressed: () {
+                          if (carrinho.lista.isNotEmpty) {
+                            Get.to(() => ConfirmacaoScreen(title: title));
+                          } else {
+                            Get.snackbar("Erro", "Carrinho vazio...");
+                          }
+                        }),
                       ],
                     )),
+                const SizedBox(height: 20),
               ],
             ),
           ),

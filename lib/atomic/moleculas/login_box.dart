@@ -36,8 +36,8 @@ class LoginBox extends Container {
               ),
               Container(
                   margin: const EdgeInsets.fromLTRB(100, 40, 100, 0),
-                  child: BotaoLogin(
-                      () => realizarLogin(senhaTextField, loginTextField, title))),
+                  child: BotaoLogin(() =>
+                      realizarLogin(senhaTextField, loginTextField, title))),
             ],
           ),
         );
